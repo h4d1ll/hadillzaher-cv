@@ -79,6 +79,44 @@
       box-shadow:var(--shadow);animation:fadeIn .3s ease-in-out;}
     @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
     .close{float:right;font-size:1.4rem;cursor:pointer;color:var(--muted);}
+    .modal-content {
+  background: var(--panel);
+  padding: 25px;
+  border-radius: 18px;
+  max-width: 700px;
+  max-height: 80vh;
+  overflow-y: auto;  /* enables vertical scrolling if content is tall */
+  box-shadow: var(--shadow);
+  animation: fadeInUp 0.35s ease-in-out;
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand) var(--panel);
+}
+
+.charts-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+}
+
+.charts-container img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.charts-container img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+@keyframes fadeInUp {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
   </style>
 
   <script>
@@ -200,13 +238,14 @@
       quant-style overview of fintech vs banking sector performance.
     </p>
 
-    <!-- Embed the charts -->
-    <div style="margin-top:20px;text-align:center;">
-      <img src="assets/fintech_banks_cumulative.png" alt="Cumulative Returns Chart" style="width:100%;border-radius:12px;margin-bottom:16px;">
-      <img src="assets/rolling_sharpe.png" alt="Rolling Sharpe Ratios Chart" style="width:100%;border-radius:12px;">
+    <!-- Charts container -->
+    <div class="charts-container">
+      <img src="assets/fintech_banks_cumulative.png" alt="Cumulative Returns Chart">
+      <img src="assets/rolling_sharpe.png" alt="Rolling Sharpe Ratios Chart">
     </div>
   </div>
 </div>
+
 
 
     <!-- Contact -->
