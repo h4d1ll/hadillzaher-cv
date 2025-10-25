@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hadill Zaher — CV</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <meta name="description" content="CV website for Hadill Zaher — Accounting & Finance graduate with interests in fintech, investment banking, and asset management." />
+  <meta name="description" content="CV website for Hadill Zaher — Accounting & Finance graduate passionate about fintech, investing, and quantitative financial analysis using Python and Excel." />
   <meta property="og:title" content="Hadill Zaher — CV" />
   <meta property="og:description" content="Accounting & Finance graduate based in London. Passionate about fintech, data-driven investing, and financial strategy." />
   <meta property="og:image" content="https://h4d1ll.github.io/hadillzaher-cv/preview.png" />
@@ -52,7 +52,7 @@
     .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;
       background:var(--panel);color:var(--ink);
       border:1px solid color-mix(in oklab,var(--ink) 12%,transparent);
-      box-shadow:var(--shadow);}
+      box-shadow:var(--shadow);cursor:pointer;}
     .btn:hover{transform:translateY(-1px)}
     .btn-outline{background:transparent}
     main{padding-top:30px}
@@ -72,13 +72,13 @@
       border:1px solid color-mix(in oklab,var(--ink) 12%,transparent);
       background:color-mix(in oklab,var(--panel) 85%,transparent)}
     .tags{display:flex;flex-wrap:wrap;gap:8px}
-    .kvs{display:grid;grid-template-columns:140px 1fr;gap:8px;align-items:start}
-    @media(max-width:640px){.kvs{grid-template-columns:1fr}}
     footer{margin:40px 0 20px;color:var(--muted);text-align:center}
-    .about-text { line-height: 1.9;font-size: 1.05rem;letter-spacing: 0.1px;}
-    .backtop{position:fixed;right:20px;bottom:20px;padding:10px 12px;border-radius:12px;
-      background:var(--panel);
-      border:1px solid color-mix(in oklab,var(--ink) 12%,transparent);box-shadow:var(--shadow)}
+    .modal{display:none;position:fixed;z-index:100;left:0;top:0;width:100%;height:100%;
+      background-color:rgba(0,0,0,0.75);align-items:center;justify-content:center;}
+    .modal-content{background:var(--panel);padding:25px;border-radius:18px;max-width:600px;
+      box-shadow:var(--shadow);animation:fadeIn .3s ease-in-out;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    .close{float:right;font-size:1.4rem;cursor:pointer;color:var(--muted);}
   </style>
 
   <script>
@@ -89,13 +89,17 @@
     function toggleTheme(){
       const isLight=document.documentElement.getAttribute('data-theme')==='light';
       localStorage.setItem('theme',isLight?'dark':'light');applyTheme();}
+
+    function openModal(id){document.getElementById(id).style.display='flex';}
+    function closeModal(id){document.getElementById(id).style.display='none';}
   </script>
 </head>
+
 <body>
   <header class="hero">
     <div class="container hero-inner">
       <div class="brand">
-        <div class="avatar" aria-hidden="true">HZ</div>
+        <div class="avatar">HZ</div>
         <div>
           <div class="name">Hadill Zaher</div>
           <div class="role">Accounting &amp; Finance Graduate — London</div>
@@ -104,7 +108,7 @@
       <div class="actions">
         <a class="btn btn-outline" href="#contact">Contact</a>
         <a class="btn" href="#projects">Projects</a>
-        <a class="btn" href="HadillZaherCV.docx.pdf" target="_blank" rel="noopener">Download CV</a>
+        <a class="btn" href="HadillZaherCV.docx.pdf" target="_blank">Download CV</a>
         <button class="btn" onclick="toggleTheme()">🌗</button>
       </div>
     </div>
@@ -117,20 +121,14 @@
         <div>
           <h1>Hi, I’m Hadill.</h1>
           <p class="muted">
-            I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, with a strong interest in financial innovation and quantitative analysis. I’m passionate about bridging finance and technology — using data to enhance decision-making, improve efficiency, and drive investment insights. My interests span fintech, asset management, and corporate finance, and I enjoy turning complex information into actionable financial strategies.
+            I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, passionate about fintech, quantitative analysis, and using data to improve investment decisions.
           </p>
-
-          <p class="muted">
-          Outside of academics, I experiment with small projects in Python and Excel, build simple dashboards for portfolio tracking, and help friends and family with budgeting and long-term investing.
-          </p>
-
           <div class="tags" style="margin-top:12px">
             <span class="badge">Financial Analysis</span>
             <span class="badge">Valuation</span>
             <span class="badge">Excel / Power Query</span>
             <span class="badge">Python (Pandas)</span>
             <span class="badge">SQL</span>
-            <span class="badge">Data Visualization</span>
             <span class="badge">Fintech Analytics</span>
           </div>
         </div>
@@ -144,70 +142,68 @@
           <div><a href="https://github.com/h4d1ll" target="_blank">github.com/h4d1ll</a></div>
           <div class="muted">Location</div>
           <div>London, United Kingdom</div>
-          <div class="muted">Focus Areas</div>
-          <div>Fintech • Asset Management • Investment Banking • Financial Data</div>
         </div>
       </div>
     </section>
 
     <!-- Projects -->
-    <div class="section-title" id="projects"><h2>Projects &amp; Research</h2><span class="badge">Fintech &amp; Finance</span></div>
+    <div class="section-title" id="projects"><h2>Projects &amp; Research</h2></div>
     <section class="grid grid-2">
       <article class="card">
         <h3>📈 Fintech Valuation Tracker</h3>
-        <p class="muted">Developed a small dashboard using Python and Excel to track fintech stock performance, analyzing correlations between interest rates and valuation multiples. Visualized historical P/E trends using Matplotlib.</p>
+        <p class="muted">Developed a dashboard using Python and Excel to track fintech stock performance and visualize P/E trends using Matplotlib.</p>
       </article>
+
       <article class="card">
         <h3>💰 Personal Investing Playbook</h3>
-        <p class="muted">Built a long-term ETF portfolio model, incorporating dollar-cost averaging and rebalancing logic. Designed Excel templates to project returns and improve personal budgeting and financial planning.</p>
+        <p class="muted">Built a long-term ETF portfolio model with rebalancing and DCA logic to forecast returns and support financial planning.</p>
       </article>
+
       <article class="card">
         <h3>🏦 Banking Crises & Stress Testing (2024)</h3>
-        <p class="muted">Analyzed the SVB and Credit Suisse collapses, identifying contagion risks and liquidity management challenges. Studied central bank interventions and their impact on market sentiment and investor behavior.</p>
+        <p class="muted">Analyzed the SVB and Credit Suisse collapses, studying contagion risks, liquidity stress, and central bank responses.</p>
       </article>
+
       <article class="card">
         <h3>🤖 Python Risk Model (Prototype)</h3>
-        <p class="muted">Explored how Python can be used to model portfolio volatility using Monte Carlo simulations. Calculated VaR metrics for a small multi-asset portfolio, applying NumPy and basic probability functions.</p>
+        <p class="muted">Modelled portfolio volatility and Value at Risk (VaR) using Monte Carlo simulations with NumPy and probability functions.</p>
+      </article>
+
+      <!-- NEW PROJECT -->
+      <article class="card">
+        <h3>📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
+        <p class="muted">
+          Built a Python-based financial analytics model comparing fintech and traditional banks over a 3-year horizon. 
+          Automated data collection with <code>yfinance</code>, calculated Sharpe ratios, volatility, and drawdowns, and exported results to Excel with dynamic visuals.
+        </p>
+        <button class="btn" onclick="openModal('modal1')">View Analysis</button>
       </article>
     </section>
 
-    <!-- Skills -->
-    <div class="section-title"><h2>Skills</h2><span class="badge">Finance • Data • Tech</span></div>
-    <section class="grid grid-3">
-      <div class="card">
-        <h3>Technical</h3>
-        <div class="tags">
-          <span class="badge">Excel / VBA</span>
-          <span class="badge">Python (Pandas, NumPy)</span>
-          <span class="badge">SQL</span>
-          <span class="badge">APIs</span>
-          <span class="badge">Bloomberg</span>
-        </div>
+    <!-- Modal Popup -->
+    <div id="modal1" class="modal" onclick="if(event.target==this)closeModal('modal1')">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal1')">&times;</span>
+        <h3>📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
+        <p class="muted">
+          This project used <b>Python (pandas, numpy, matplotlib, yfinance)</b> to analyze 3 years of market data for fintech firms (PayPal, Adyen, Wise) versus major banks (JPMorgan, Goldman Sachs, HSBC). 
+          It computed key metrics — <b>annualized returns, volatility, Sharpe ratios, and drawdowns</b> — and visualized performance differences through:
+        </p>
+        <ul class="muted">
+          <li>📈 Cumulative return charts (3-year horizon)</li>
+          <li>📊 Rolling 6-month Sharpe ratios (risk-adjusted performance)</li>
+          <li>📉 Correlation heatmaps and Excel dashboards</li>
+        </ul>
+        <p class="muted">
+          The output, <b>Fintech_vs_Banks_3Y_Report.xlsx</b>, includes dynamic charts and category comparisons, giving a professional quant-style overview of fintech vs banking sector performance.
+        </p>
       </div>
-      <div class="card">
-        <h3>Finance</h3>
-        <div class="tags">
-          <span class="badge">Valuation (DCF, Comps)</span>
-          <span class="badge">Portfolio Theory</span>
-          <span class="badge">Risk Analysis</span>
-          <span class="badge">Financial Modelling</span>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Core Skills</h3>
-        <div class="tags">
-          <span class="badge">Analytical Thinking</span>
-          <span class="badge">Strategic Judgment</span>
-          <span class="badge">Attention to Detail</span>
-          <span class="badge">Collaboration</span>
-        </div>
-      </div>
-    </section>
+    </div>
 
     <!-- Contact -->
-    <div class="section-title" id="contact"><h2>Contact</h2><span class="badge">Let’s Connect</span></div>
+    <div class="section-title" id="contact"><h2>Contact</h2></div>
     <section class="card">
-      <p>Interested in discussing opportunities in fintech, asset management, or finance? I’d love to connect.</p>
+      <p>Interested in discussing opportunities in fintech, asset management, or finance? Let’s connect!</p>
       <div class="kvs">
         <div class="muted">Email</div>
         <div><a href="mailto:miss.hzaher@gmail.com">miss.hzaher@gmail.com</a></div>
@@ -215,10 +211,6 @@
         <div><a href="https://www.linkedin.com/in/hadill-zaher-66bb96216/" target="_blank">linkedin.com/in/hadill-zaher-66bb96216</a></div>
         <div class="muted">GitHub</div>
         <div><a href="https://github.com/h4d1ll" target="_blank">github.com/h4d1ll</a></div>
-      </div>
-      <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-        <a class="btn" href="HadillZaherCV.docx.pdf" target="_blank">Download CV (PDF)</a>
-        <a class="btn btn-outline" href="#about">Back to top ↑</a>
       </div>
     </section>
   </main>
