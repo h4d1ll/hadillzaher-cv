@@ -181,24 +181,33 @@
     </section>
 
     <!-- Modal Popup -->
-    <div id="modal1" class="modal" onclick="if(event.target==this)closeModal('modal1')">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal('modal1')">&times;</span>
-        <h3>📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
-        <p class="muted">
-          This project used <b>Python (pandas, numpy, matplotlib, yfinance)</b> to analyze 3 years of market data for fintech firms (PayPal, Adyen, Wise) versus major banks (JPMorgan, Goldman Sachs, HSBC). 
-          It computed key metrics — <b>annualized returns, volatility, Sharpe ratios, and drawdowns</b> — and visualized performance differences through:
-        </p>
-        <ul class="muted">
-          <li>📈 Cumulative return charts (3-year horizon)</li>
-          <li>📊 Rolling 6-month Sharpe ratios (risk-adjusted performance)</li>
-          <li>📉 Correlation heatmaps and Excel dashboards</li>
-        </ul>
-        <p class="muted">
-          The output, <b>Fintech_vs_Banks_3Y_Report.xlsx</b>, includes dynamic charts and category comparisons, giving a professional quant-style overview of fintech vs banking sector performance.
-        </p>
-      </div>
+<div id="modal1" class="modal" onclick="if(event.target==this)closeModal('modal1')">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal1')">&times;</span>
+    <h3>📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
+    <p class="muted">
+      This project used <b>Python (pandas, numpy, matplotlib, yfinance)</b> to analyze 3 years of market data for fintech firms 
+      (<b>PayPal, Adyen, Wise</b>) versus major banks (<b>JPMorgan, Goldman Sachs, HSBC</b>). 
+      It computed key metrics — <b>annualized returns, volatility, Sharpe ratios, and drawdowns</b> — and visualized performance differences through:
+    </p>
+    <ul class="muted">
+      <li>📈 Cumulative return charts (3-year horizon)</li>
+      <li>📊 Rolling 6-month Sharpe ratios (risk-adjusted performance)</li>
+      <li>📉 Correlation heatmaps and Excel dashboards</li>
+    </ul>
+    <p class="muted">
+      The output, <b>Fintech_vs_Banks_3Y_Report.xlsx</b>, includes dynamic charts and category comparisons, giving a professional 
+      quant-style overview of fintech vs banking sector performance.
+    </p>
+
+    <!-- Embed the charts -->
+    <div style="margin-top:20px;text-align:center;">
+      <img src="assets/fintech_banks_cumulative.png" alt="Cumulative Returns Chart" style="width:100%;border-radius:12px;margin-bottom:16px;">
+      <img src="assets/rolling_sharpe.png" alt="Rolling Sharpe Ratios Chart" style="width:100%;border-radius:12px;">
     </div>
+  </div>
+</div>
+
 
     <!-- Contact -->
     <div class="section-title" id="contact"><h2>Contact</h2></div>
