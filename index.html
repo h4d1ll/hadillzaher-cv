@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hadill Zaher — CV</title>
+  <meta name="description" content="CV website for Hadill Zaher — Accounting & Finance graduate based in London, interested in investment, asset management and consulting." />
+  <meta property="og:title" content="Hadill Zaher — CV" />
+  <meta property="og:description" content="Accounting & Finance graduate based in London. Interests: investing, asset management, consulting." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#111827" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0b0f17;        /* slate-950 */
+      --panel: #0f172a;     /* slate-900 */
+      --ink: #e5e7eb;       /* gray-200 */
+      --muted:#9ca3af;      /* gray-400 */
+      --brand:#22d3ee;      /* cyan-400 */
+      --brand-2:#a78bfa;    /* violet-400 */
+      --accent:#34d399;     /* emerald-400 */
+      --link:#38bdf8;       /* sky-400 */
+      --ring: rgba(56,189,248,.35);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    [data-theme="light"]{
+      --bg: #ffffff;
+      --panel: #f8fafc;
+      --ink: #0f172a;
+      --muted:#475569;
+      --brand:#0ea5e9;
+      --brand-2:#7c3aed;
+      --accent:#059669;
+      --link:#0ea5e9;
+      --ring: rgba(14,165,233,.35);
+      --shadow: 0 10px 30px rgba(2,6,23,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--ink); background: radial-gradient(1200px 600px at 80% -10%, rgba(124,58,237,.15), transparent 60%),
+                        radial-gradient(900px 500px at -10% 10%, rgba(34,211,238,.18), transparent 60%),
+                        var(--bg);
+      line-height:1.6;
+    }
+    a{color:var(--link); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{width:min(100%, 1100px); margin-inline:auto; padding:24px}
+    header.hero{position:sticky; top:0; z-index:50; backdrop-filter:saturate(160%) blur(10px); background:color-mix(in oklab, var(--bg) 85%, transparent); border-bottom:1px solid color-mix(in oklab, var(--ink) 15%, transparent)}
+    .hero-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-block:10px}
+    .brand{display:flex; align-items:center; gap:14px}
+    .avatar{width:52px; height:52px; border-radius:14px; background:linear-gradient(135deg,var(--brand),var(--brand-2)); display:grid; place-items:center; color:#0b0f17; font-weight:800}
+    .name{font-weight:700; font-size:1.15rem; letter-spacing:.2px}
+    .role{color:var(--muted); font-size:.95rem}
+    .actions{display:flex; gap:10px; align-items:center}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px; background:var(--panel); color:var(--ink); border:1px solid color-mix(in oklab, var(--ink) 12%, transparent); box-shadow:var(--shadow)}
+    .btn:hover{transform:translateY(-1px)}
+    .btn-outline{background:transparent}
+
+    main{padding-top:30px}
+    section{scroll-margin-top:80px;}
+    .grid{display:grid; gap:18px}
+    .grid-2{grid-template-columns:repeat(2, minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3, minmax(0,1fr))}
+    @media (max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+    .card{background:linear-gradient(180deg, color-mix(in oklab, var(--panel) 94%, transparent), color-mix(in oklab, var(--panel) 96%, transparent)); border:1px solid color-mix(in oklab, var(--ink) 12%, transparent); border-radius:18px; padding:20px; box-shadow:var(--shadow)}
+    .card h3{margin:0 0 8px 0; font-size:1.05rem}
+    .muted{color:var(--muted)}
+
+    .section-title{display:flex; align-items:center; gap:10px; margin:30px 0 12px}
+    .section-title h2{margin:0; font-size:1.35rem}
+    .badge{display:inline-block; padding:.35rem .6rem; border-radius:999px; font-size:.8rem; border:1px solid color-mix(in oklab, var(--ink) 12%, transparent); background:color-mix(in oklab, var(--panel) 85%, transparent)}
+    .tags{display:flex; flex-wrap:wrap; gap:8px}
+    .kvs{display:grid; grid-template-columns: 140px 1fr; gap:8px; align-items:start}
+    @media (max-width:640px){.kvs{grid-template-columns: 1fr}}
+
+    .timeline{display:grid; gap:14px}
+    .item{display:grid; grid-template-columns: 120px 1fr; gap:16px}
+    .item .when{color:var(--muted); font-variant-numeric:tabular-nums}
+    .item .what{background:linear-gradient(180deg, color-mix(in oklab, var(--panel) 92%, transparent), color-mix(in oklab, var(--panel) 98%, transparent)); border:1px solid color-mix(in oklab, var(--ink) 12%, transparent); padding:14px 16px; border-radius:14px}
+    @media (max-width:720px){.item{grid-template-columns:1fr}}
+
+    footer{margin:40px 0 20px; color:var(--muted); text-align:center}
+
+    /* Print styles */
+    @media print{
+      header.hero, .btn, .actions, .theme-toggle, .backtop{display:none !important}
+      body{background:#fff; color:#000}
+      .card{box-shadow:none}
+    }
+
+    .backtop{position:fixed; right:20px; bottom:20px; padding:10px 12px; border-radius:12px; background:var(--panel); border:1px solid color-mix(in oklab, var(--ink) 12%, transparent); box-shadow:var(--shadow)}
+  </style>
+  <script>
+    // Persisted theme toggle
+    const applyTheme = () => {
+      const t = localStorage.getItem('theme') || 'dark';
+      if(t === 'light'){ document.documentElement.setAttribute('data-theme','light'); }
+      else { document.documentElement.removeAttribute('data-theme'); }
+    };
+    applyTheme();
+    function toggleTheme(){
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      localStorage.setItem('theme', isLight ? 'dark' : 'light');
+      applyTheme();
+    }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Hadill Zaher",
+    "address": {"@type":"PostalAddress","addressLocality":"London","addressCountry":"GB"},
+    "alumniOf": {"@type":"CollegeOrUniversity","name":"Bayes Business School, City, University of London"},
+    "jobTitle": "Accounting & Finance Graduate",
+    "url": "https://example.com",
+    "sameAs": ["https://www.linkedin.com/"]
+  }
+  </script>
+</head>
+<body>
+  <header class="hero">
+    <div class="container hero-inner">
+      <div class="brand">
+        <div class="avatar" aria-hidden="true">HZ</div>
+        <div>
+          <div class="name">Hadill Zaher</div>
+          <div class="role">Accounting &amp; Finance Graduate — London</div>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-outline" href="#contact">Contact</a>
+        <a class="btn" href="#projects">Projects</a>
+        <button class="btn" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle light/dark">🌗</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Intro / About -->
+    <section id="about" class="card">
+      <div class="grid grid-2">
+        <div>
+          <h1 style="margin:0 0 8px 0">Hi, I’m Hadill.</h1>
+          <p class="muted">I’m a 2025 graduate (2:1) in Accounting &amp; Finance from Bayes Business School, based in London. I’m passionate about investing, asset management, and financial strategy, and I enjoy translating data into practical decisions. I also like helping friends and family with budgeting and long‑term wealth planning.</p>
+          <div class="tags" style="margin-top:12px">
+            <span class="badge">Financial Analysis</span>
+            <span class="badge">Valuation</span>
+            <span class="badge">Excel / Power Query</span>
+            <span class="badge">Python (beginner)</span>
+            <span class="badge">SQL (basic)</span>
+            <span class="badge">Data Visualization</span>
+          </div>
+        </div>
+        <div class="kvs">
+          <div class="muted">Email</div>
+          <div><a href="mailto:miss.hzaher@gmail.com">miss.hzaher@gmail.com</a></div>
+          <div class="muted">LinkedIn</div>
+          <div><a href="https://www.linkedin.com/in/hadill-zaher-66bb96216/" target="_blank" rel="noopener noreferrer">
+  www.linkedin.com/in/hadill-zaher-66bb96216
+</a></div>
+          <div class="muted">Location</div>
+          <div>London, United Kingdom</div>
+          <div class="muted">Interests</div>
+          <div>Investing, Accounting, Markets, Consulting, Fintech</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <div class="section-title"><h2>Experience</h2><span class="badge">Recent</span></div>
+    <section class="timeline">
+      <div class="item">
+        <div class="when">Summer 2024</div>
+        <div class="what">
+          <h3 style="margin:0">Virtual Summer Intern — Investment Management <span class="muted">(Bright Network)</span></h3>
+          <p style="margin:.4rem 0 0">Completed project simulations in portfolio construction and manager research. Built simple factor screens and presented findings on risk/return trade‑offs for multi‑asset allocations.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="when">2023</div>
+        <div class="what">
+          <h3 style="margin:0">Trainee Accountant — Double Eleven Management Ltd.</h3>
+          <ul style="margin:.4rem 0 0 1.1rem">
+            <li>Assisted with bank reconciliations and daily P&amp;L snapshots for a branch.</li>
+            <li>Compiled revenue and direct cost data; highlighted variances to budget.</li>
+            <li>Supported month‑end close documentation and audit trail quality.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="item">
+        <div class="when">2022</div>
+        <div class="what">
+          <h3 style="margin:0">Sales Assistant — Lovisa</h3>
+          <p style="margin:.4rem 0 0">Drove customer experience and store KPIs; gained practical retail operations and cash‑handling skills.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <div class="section-title"><h2>Education</h2><span class="badge">BSc (Hons)</span></div>
+    <section class="card">
+      <h3 style="margin:0">Bayes Business School, City, University of London — BSc Accounting &amp; Finance (2:1), 2025</h3>
+      <p class="muted" style="margin:.35rem 0 0">A‑Levels: History (A*), Politics (A), Mathematics (B)</p>
+      <div class="tags" style="margin-top:8px">
+        <span class="badge">Corporate Finance</span>
+        <span class="badge">Financial Markets</span>
+        <span class="badge">Banking &amp; Regulation</span>
+        <span class="badge">Econometrics</span>
+      </div>
+    </section>
+
+    <!-- Projects / Research -->
+    <div class="section-title" id="projects"><h2>Projects &amp; Research</h2><span class="badge">Selected</span></div>
+    <section class="grid grid-2">
+      <article class="card">
+        <h3>Stress Testing &amp; Banking Crises (2023–2024)</h3>
+        <p class="muted">Explored SVB and Credit Suisse episodes; evaluated liquidity risk, central bank interventions, and contagion pathways. Summarized lessons for stress‑testing frameworks and investor behavior.</p>
+      </article>
+      <article class="card">
+        <h3>Personal Investing Playbook</h3>
+        <p class="muted">Built a long‑term portfolio strategy using global equity ETFs and factor tilts; created budgeting templates for friends and family and automated contribution schedules.</p>
+      </article>
+    </section>
+
+    <!-- Activities -->
+    <div class="section-title"><h2>Leadership &amp; Activities</h2><span class="badge">Campus</span></div>
+    <section class="grid grid-3">
+      <div class="card">
+        <h3>M&amp;A &amp; Private Equity Society</h3>
+        <p class="muted">Case practice, valuation workshops, and deal comps.</p>
+      </div>
+      <div class="card">
+        <h3>Trading Society</h3>
+        <p class="muted">Macro discussions and paper trading competitions.</p>
+      </div>
+      <div class="card">
+        <h3>Finance &amp; Banking Society</h3>
+        <p class="muted">Speaker series and networking with practitioners.</p>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <div class="section-title"><h2>Skills</h2><span class="badge">Technical &amp; Core</span></div>
+    <section class="grid grid-3">
+      <div class="card">
+        <h3>Analytics &amp; Tools</h3>
+        <div class="tags">
+          <span class="badge">Excel / Power Query</span>
+          <span class="badge">PowerPoint</span>
+          <span class="badge">Python (Pandas)</span>
+          <span class="badge">SQL (basic)</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Finance</h3>
+        <div class="tags">
+          <span class="badge">DCF / Comps</span>
+          <span class="badge">Portfolio Theory</span>
+          <span class="badge">Risk &amp; Liquidity</span>
+          <span class="badge">Accounting</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Soft Skills</h3>
+        <div class="tags">
+          <span class="badge">Communication</span>
+          <span class="badge">Teamwork</span>
+           <span class="badge">Strategic Analysis</span>
+            <span class="badge">Ethical Judgment</span>
+          <span class="badge">Attention to Detail</span>
+          <span class="badge">Problem Solving</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <div class="section-title" id="contact"><h2>Contact</h2><span class="badge">Let’s talk</span></div>
+    <section class="card">
+      <p>Want to collaborate or chat about roles in investment, asset management, or consulting? I’d love to hear from you.</p>
+      <div class="kvs" style="margin-top:8px">
+        <div class="muted">Email</div>
+        <div><a href="mailto:you@example.com">miss.hzaher@gmail.com</a></div>
+        <div class="muted">LinkedIn</div>
+        <div><a href="https://www.linkedin.com/in/hadill-zaher-66bb96216/" target="_blank" rel="noopener noreferrer">
+  www.linkedin.com/in/hadill-zaher-66bb96216
+</a></div>
+      </div>
+      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+        <a class="btn" href="HadillZaherCV.docx.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+        <a class="btn btn-outline" href="#about">Back to top ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <button class="backtop" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+  <footer>
+    © <span id="y"></span> Hadill Zaher · Built with HTML/CSS/JS
+  </footer>
+
+  <script>
+    // dynamic year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
