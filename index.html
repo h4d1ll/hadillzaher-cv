@@ -126,9 +126,9 @@
           <div class="muted">Email</div>
           <div><a href="mailto:miss.hzaher@gmail.com">miss.hzaher@gmail.com</a></div>
           <div class="muted">LinkedIn</div>
-          <div><a href="https://www.linkedin.com/in/hadill-zaher-66bb96216/" target="_blank">linkedin.com/in/hadill-zaher-66bb96216</a></div>
+          <div><a href="https://www.linkedin.com/in/hadill-zaher-66bb96216/" target="_blank" rel="noopener">linkedin.com/in/hadill-zaher-66bb96216</a></div>
           <div class="muted">GitHub</div>
-          <div><a href="https://github.com/h4d1ll" target="_blank">github.com/h4d1ll</a></div>
+          <div><a href="https://github.com/h4d1ll" target="_blank" rel="noopener">github.com/h4d1ll</a></div>
           <div class="muted">Location</div>
           <div>London, United Kingdom</div>
         </div>
@@ -138,37 +138,37 @@
     <!-- Projects -->
     <div class="section-title" id="projects"><h2>Projects &amp; Research</h2></div>
     <section class="grid grid-2">
+      <!-- 1) Fintech Valuation Tracker -->
       <article class="card">
         <h3>📈 Fintech Valuation Tracker</h3>
-        <p class="muted">Developed a dashboard using Python and Excel to track fintech stock performance and visualize P/E trends using Matplotlib.</p>
+        <p class="muted">Dashboard using Python & Excel to track fintech stock performance and visualize P/E trends with Matplotlib.</p>
+        <button class="btn" onclick="openModal('modalValuation')">View Details</button>
       </article>
 
+      <!-- 2) Personal Investing Playbook -->
       <article class="card">
         <h3>💰 Personal Investing Playbook</h3>
-        <p class="muted">Built a long-term ETF portfolio model with rebalancing and DCA logic to forecast returns and support financial planning.</p>
+        <p class="muted">Long-term ETF model with DCA and rebalancing logic. Templates to forecast returns and improve budgeting.</p>
+        <button class="btn" onclick="openModal('modalPlaybook')">View Details</button>
       </article>
 
+      <!-- 3) Banking Crises & Stress Testing -->
       <article class="card">
         <h3>🏦 Banking Crises & Stress Testing (2024)</h3>
-        <p class="muted">Analyzed the SVB and Credit Suisse collapses, studying contagion risks, liquidity stress, and central bank responses.</p>
+        <p class="muted">SVB & Credit Suisse analysis: contagion, liquidity risk, and central bank interventions.</p>
+        <button class="btn" onclick="openModal('modalStress')">View Details</button>
       </article>
 
-      <article class="card">
-        <h3>🤖 Python Risk Model (Prototype)</h3>
-        <p class="muted">Modelled portfolio volatility and Value at Risk (VaR) using Monte Carlo simulations with NumPy and probability functions.</p>
-      </article>
-
-      <!-- Fintech vs Banks project card (opens modal) -->
+      <!-- 4) Fintech vs Banks (kept) -->
       <article class="card">
         <h3>📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
-        <p class="muted">
-          Python-based comparison of fintech vs banks over 3 years: automated data via <code>yfinance</code>, Sharpe/volatility/drawdowns, and an Excel report with visuals.
-        </p>
+        <p class="muted">Python-based 3-year comparison (yfinance, pandas): Sharpe, volatility, drawdowns, and Excel dashboard.</p>
         <button class="btn" onclick="openModal('modal1')">View Analysis</button>
       </article>
     </section>
 
-    <!-- Modal Popup (charts ONLY appear here) -->
+    <!-- MODALS -->
+    <!-- Fintech vs Banks (existing) -->
     <div id="modal1" class="modal" onclick="if(event.target===this)closeModal('modal1')">
       <div class="modal-content">
         <span class="close" onclick="closeModal('modal1')">&times;</span>
@@ -177,31 +177,92 @@
           Built with <b>pandas, numpy, matplotlib, yfinance</b>. Metrics: <b>annualized return, volatility, Sharpe, drawdown, correlations</b>.
           Outputs: <b>Fintech_vs_Banks_3Y_Report.xlsx</b>.
         </p>
-
         <ul class="muted">
           <li>📈 <b>Cumulative Return Chart:</b> 3-year comparative performance</li>
           <li>📊 <b>Rolling 6-Month Sharpe:</b> risk-adjusted returns</li>
           <li>📉 <b>Correlation Heatmap:</b> diversification insight</li>
           <li>📘 <b>Excel Dashboard:</b> automated summary & visuals</li>
         </ul>
-
         <div class="charts-container">
           <div>
-            <img src="assets/fintech_banks_cumulative.png?v=7" alt="Cumulative Returns Chart">
+            <img src="assets/fintech_banks_cumulative.png?v=8" alt="Cumulative Returns Chart" loading="lazy" onerror="this.style.display='none'">
             <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 1: Cumulative Returns (3-Year)</p>
           </div>
           <div>
-            <img src="assets/rolling_sharpe.png?v=7" alt="Rolling Sharpe Ratios Chart">
+            <img src="assets/rolling_sharpe.png?v=8" alt="Rolling Sharpe Ratios Chart" loading="lazy" onerror="this.style.display='none'">
             <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 2: Rolling 6-Month Sharpe</p>
           </div>
           <div>
-            <img src="assets/correlation_heatmap.png?v=7" alt="Correlation Heatmap Chart">
+            <img src="assets/correlation_heatmap.png?v=8" alt="Correlation Heatmap Chart" loading="lazy" onerror="this.style.display='none'">
             <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 3: Correlation Heatmap</p>
           </div>
         </div>
-
         <div style="margin-top:22px;text-align:center;">
-          <a class="btn" href="Fintech_vs_Banks_3Y_Report.xlsx?v=7" target="_blank" download>📥 Download Excel Report</a>
+          <a class="btn" href="Fintech_vs_Banks_3Y_Report.xlsx?v=8" target="_blank" rel="noopener" download>📥 Download Excel Report</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEW: Fintech Valuation Tracker modal -->
+    <div id="modalValuation" class="modal" onclick="if(event.target===this)closeModal('modalValuation')">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modalValuation')">&times;</span>
+        <h3>📈 Fintech Valuation Tracker</h3>
+        <p class="muted">
+          Python + Excel workflow tracking selected fintechs’ P/E and price performance. Pulled prices via <code>yfinance</code>,
+          calculated rolling P/E (where available) or proxied valuation using price vs revenue growth, and visualized trends with Matplotlib.
+        </p>
+        <ul class="muted">
+          <li>🧮 Metrics: trailing P/E (if available), rolling returns, simple factor screens</li>
+          <li>📊 Visuals: P/E trendlines & performance overlays</li>
+          <li>📘 Output: Excel workbook with charts & filters</li>
+        </ul>
+        <div class="charts-container">
+          <!-- Optional images if you add them later -->
+          <img src="assets/valuation_pe_trends.png?v=1" alt="P/E Trendlines" loading="lazy" onerror="this.style.display='none'">
+          <img src="assets/valuation_perf_overlay.png?v=1" alt="Performance Overlay" loading="lazy" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+
+    <!-- NEW: Personal Investing Playbook modal -->
+    <div id="modalPlaybook" class="modal" onclick="if(event.target===this)closeModal('modalPlaybook')">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modalPlaybook')">&times;</span>
+        <h3>💰 Personal Investing Playbook</h3>
+        <p class="muted">
+          ETF-based long-term model built in Excel with <b>dollar-cost averaging</b>, periodic <b>rebalancing</b>, and return projections.
+          Scenario toggles simulate contribution schedules, fees, and drawdowns. Designed clean templates friends/family can reuse.
+        </p>
+        <ul class="muted">
+          <li>⚙️ Logic: DCA cadence, drift thresholds, rebalance bands</li>
+          <li>📈 Views: growth projections, drawdown simulation</li>
+          <li>📘 Output: shareable Excel templates</li>
+        </ul>
+        <div class="charts-container">
+          <img src="assets/playbook_projection.png?v=1" alt="Projection Chart" loading="lazy" onerror="this.style.display='none'">
+          <img src="assets/playbook_rebalance.png?v=1" alt="Rebalancing View" loading="lazy" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+
+    <!-- NEW: Banking Crises & Stress Testing modal -->
+    <div id="modalStress" class="modal" onclick="if(event.target===this)closeModal('modalStress')">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modalStress')">&times;</span>
+        <h3>🏦 Banking Crises & Stress Testing (2024)</h3>
+        <p class="muted">
+          Case study of SVB & Credit Suisse: funding fragility, deposit flight dynamics, and market contagion.
+          Summarized lessons for liquidity coverage, stress scenarios, and policy backstops (BTFP, swap lines).
+        </p>
+        <ul class="muted">
+          <li>🔎 Themes: duration mismatch, unrealized AFS/HTM losses, confidence spirals</li>
+          <li>🧪 Stress set: rate shocks, deposit outflows, bond markdowns</li>
+          <li>📗 Deliverable: concise memo + stress tables</li>
+        </ul>
+        <div class="charts-container">
+          <img src="assets/stress_liquidity.png?v=1" alt="Liquidity Stress Illustration" loading="lazy" onerror="this.style.display='none'">
+          <img src="assets/stress_contagion.png?v=1" alt="Contagion Paths" loading="lazy" onerror="this.style.display='none'">
         </div>
       </div>
     </div>
@@ -214,9 +275,9 @@
         <div class="muted">Email</div>
         <div><a href="mailto:miss.hzaher@gmail.com">miss.hzaher@gmail.com</a></div>
         <div class="muted">LinkedIn</div>
-        <div><a href="https://www.linkedin.com/in/hadill-zaher-66bb96216/" target="_blank">linkedin.com/in/hadill-zaher-66bb96216</a></div>
+        <div><a href="https://www.linkedin.com/in/hadill-zaher-66bb96216/" target="_blank" rel="noopener">linkedin.com/in/hadill-zaher-66bb96216</a></div>
         <div class="muted">GitHub</div>
-        <div><a href="https://github.com/h4d1ll" target="_blank">github.com/h4d1ll</a></div>
+        <div><a href="https://github.com/h4d1ll" target="_blank" rel="noopener">github.com/h4d1ll</a></div>
       </div>
     </section>
   </main>
