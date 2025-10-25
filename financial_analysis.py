@@ -69,11 +69,12 @@ summary = pd.DataFrame({
     "Max Drawdown (%)":  (max_dd     * 100).round(2),
 }).sort_values(["Category", "Sharpe Ratio"], ascending=[True, False])
 
-# Rolling 6-month Sharpe
+# Rolling 6-month Sharpe (robustly computed)
 window = 126
 rolling_mean = returns.rolling(window).mean()
 rolling_std  = returns.rolling(window).std()
 rolling_sharpe = (rolling_mean * 252 - rf_annual) / (rolling_std * np.sqrt(252))
+rolling_sharpe = rolling_sharpe.replace([np.inf, -np.inf], np.nan).dropna(how="all")
 
 # Group averages
 returns["Fintech Avg"] = returns[[c for c in returns.columns if c in fintech_tickers and c in data.columns]].mean(axis=1)
@@ -87,37 +88,49 @@ avg_metrics = (
 )
 
 # ---------- Charts ----------
-# 1) Cumulative returns (normalized to start = 0%)
+
+# --- CUMULATIVE RETURNS (%), robust + visible ---
+cum_pct = (cum / cum.iloc[0]) - 1.0
+cum_pct = cum_pct.replace([np.inf, -np.inf], np.nan).dropna(how="all")
+valid_cols = [c for c in cum_pct.columns if cum_pct[c].dropna().shape[0] >= 2]
+cum_pct = cum_pct[valid_cols]
+
 plt.figure(figsize=(11, 6))
-for col in cum.columns:
-    # convert cum (starts at 1.0) to % cumulative return
-    plt.plot(cum.index, (cum[col] - 1.0) * 100, label=col)
+ax = plt.gca()
+ax.set_facecolor("white")
+for col in cum_pct.columns:
+    y = cum_pct[col] * 100.0
+    if y.dropna().shape[0] >= 2:
+        plt.plot(cum_pct.index, y, label=col, linewidth=2)
 plt.title("Cumulative Returns — Fintech vs Banks (3 Years)")
 plt.xlabel("Date"); plt.ylabel("Cumulative Return (%)")
 plt.legend(loc="upper left", ncols=2, fontsize=8)
+plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig("assets/fintech_banks_cumulative.png", bbox_inches="tight")
+plt.savefig("assets/fintech_banks_cumulative.png", bbox_inches="tight", facecolor="white")
 plt.close()
 
-# 2) Rolling Sharpe (6-month)
+# --- ROLLING SHARPE (6M), robust + visible ---
 plt.figure(figsize=(11, 6))
-if "Fintech Avg" in rolling_sharpe.columns:
-    plt.plot(rolling_sharpe.index, rolling_sharpe["Fintech Avg"], label="Fintech (6M Sharpe)")
-if "Bank Avg" in rolling_sharpe.columns:
-    plt.plot(rolling_sharpe.index, rolling_sharpe["Bank Avg"], label="Banks (6M Sharpe)")
+ax = plt.gca()
+ax.set_facecolor("white")
+if "Fintech Avg" in rolling_sharpe.columns and rolling_sharpe["Fintech Avg"].dropna().shape[0] >= 2:
+    plt.plot(rolling_sharpe.index, rolling_sharpe["Fintech Avg"], label="Fintech (6M Sharpe)", linewidth=2)
+if "Bank Avg" in rolling_sharpe.columns and rolling_sharpe["Bank Avg"].dropna().shape[0] >= 2:
+    plt.plot(rolling_sharpe.index, rolling_sharpe["Bank Avg"], label="Banks (6M Sharpe)", linewidth=2)
 plt.title("Rolling 6-Month Sharpe Ratios — Fintech vs Banks")
 plt.xlabel("Date"); plt.ylabel("Sharpe Ratio")
-plt.legend(loc="best"); plt.tight_layout()
-plt.savefig("assets/rolling_sharpe.png", bbox_inches="tight")
+plt.legend(loc="best"); plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.savefig("assets/rolling_sharpe.png", bbox_inches="tight", facecolor="white")
 plt.close()
 
-# 3) Correlation heatmap
+# --- CORRELATION HEATMAP ---
 corr = returns.corr()
 plt.figure(figsize=(8, 6))
 if SEABORN_OK:
     sns.heatmap(corr, annot=True, cmap="coolwarm", center=0, fmt=".2f")
 else:
-    # Fallback basic heatmap (if seaborn not installed)
     plt.imshow(corr, cmap="coolwarm", vmin=-1, vmax=1)
     plt.colorbar()
     plt.xticks(range(len(corr.columns)), corr.columns, rotation=90)
@@ -127,32 +140,35 @@ else:
             plt.text(j, i, f"{corr.iloc[i, j]:.2f}", ha="center", va="center", color="black")
 plt.title("Correlation Heatmap — Fintech & Banks (3 Years)")
 plt.tight_layout()
-plt.savefig("assets/correlation_heatmap.png", bbox_inches="tight")
+plt.savefig("assets/correlation_heatmap.png", bbox_inches="tight", facecolor="white")
 plt.close()
 
 # ---------- Excel Report ----------
+
+# Cleaned data for Excel export
+cum_pct_excel = cum_pct.copy() * 100.0
+rolling_excel = rolling_sharpe[["Fintech Avg", "Bank Avg"]].dropna(how="all")
+
 file = "Fintech_vs_Banks_3Y_Report.xlsx"
 with pd.ExcelWriter(file, engine="xlsxwriter") as writer:
-    # Sheets
     summary.to_excel(writer, sheet_name="Summary", index=False)
     avg_metrics.to_excel(writer, sheet_name="Category Averages")
-    ((cum - 1.0) * 100).to_excel(writer, sheet_name="Cumulative Returns (%)")  # in %
-    rolling_sharpe.dropna(how="all").to_excel(writer, sheet_name="Rolling Sharpe (6M)")
+    cum_pct_excel.to_excel(writer, sheet_name="Cumulative Returns (%)")
+    rolling_excel.to_excel(writer, sheet_name="Rolling Sharpe (6M)")
     corr.to_excel(writer, sheet_name="Correlation Heatmap")
 
     wb = writer.book
     ws_sum = writer.sheets["Summary"]
 
-    # Header format
+    # Header styling
     fmt_head = wb.add_format({"bold": True, "bg_color": "#DDEBF7", "font_color": "#1F4E79", "border": 1})
     for col_num, value in enumerate(summary.columns):
         ws_sum.write(0, col_num, value, fmt_head)
 
-    # Bar chart: accurate range (Sharpe Ratio column)
+    # Accurate Sharpe Ratio bar chart
     nrows = len(summary)
     if nrows > 0:
         chart = wb.add_chart({"type": "column"})
-        # Categories = Ticker names (col 0), Values = Sharpe (col 3)
         chart.add_series({
             "name": "Sharpe Ratio",
             "categories": ["Summary", 1, 0, nrows, 0],

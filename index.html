@@ -28,31 +28,29 @@
       --ring:rgba(14,165,233,.35);--shadow:0 10px 30px rgba(2,6,23,.08);
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    body{
+      margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
       color:var(--ink);
       background:radial-gradient(1200px 600px at 80% -10%,rgba(124,58,237,.15),transparent 60%),
                  radial-gradient(900px 500px at -10% 10%,rgba(34,211,238,.18),transparent 60%),
                  var(--bg);
-      line-height:1.6;}
+      line-height:1.6;
+    }
     a{color:var(--link);text-decoration:none}
     a:hover{text-decoration:underline}
     .container{width:min(100%,1100px);margin-inline:auto;padding:24px}
     header.hero{position:sticky;top:0;z-index:50;
       backdrop-filter:saturate(160%) blur(10px);
       background:color-mix(in oklab,var(--bg) 85%,transparent);
-      border-bottom:1px solid color-mix(in oklab,var(--ink) 15%,transparent);}
+      border-bottom:1px solid color-mix(in oklab,var(--ink) 15%,transparent);
+    }
     .hero-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px}
     .brand{display:flex;align-items:center;gap:14px}
-    .avatar{width:52px;height:52px;border-radius:14px;
-      background:linear-gradient(135deg,var(--brand),var(--brand-2));
-      display:grid;place-items:center;color:#0b0f17;font-weight:800}
+    .avatar{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;color:#0b0f17;font-weight:800}
     .name{font-weight:700;font-size:1.15rem}
     .role{color:var(--muted);font-size:.95rem}
     .actions{display:flex;gap:10px;align-items:center}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;
-      background:var(--panel);color:var(--ink);
-      border:1px solid color-mix(in oklab,var(--ink) 12%,transparent);
-      box-shadow:var(--shadow);cursor:pointer;}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:var(--panel);color:var(--ink);border:1px solid color-mix(in oklab,var(--ink) 12%,transparent);box-shadow:var(--shadow);cursor:pointer}
     .btn:hover{transform:translateY(-1px)}
     .btn-outline{background:transparent}
     main{padding-top:30px}
@@ -61,73 +59,26 @@
     .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
     .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
     @media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}}
-    .card{background:linear-gradient(180deg,color-mix(in oklab,var(--panel) 94%,transparent),
-              color-mix(in oklab,var(--panel) 96%,transparent));
-      border:1px solid color-mix(in oklab,var(--ink) 12%,transparent);
-      border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+    .card{background:linear-gradient(180deg,color-mix(in oklab,var(--panel) 94%,transparent),color-mix(in oklab,var(--panel) 96%,transparent));border:1px solid color-mix(in oklab,var(--ink) 12%,transparent);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
     .muted{color:var(--muted)}
     .section-title{display:flex;align-items:center;gap:10px;margin:30px 0 12px}
     .section-title h2{margin:0;font-size:1.35rem}
-    .badge{display:inline-block;padding:.35rem .6rem;border-radius:999px;font-size:.8rem;
-      border:1px solid color-mix(in oklab,var(--ink) 12%,transparent);
-      background:color-mix(in oklab,var(--panel) 85%,transparent)}
-    .tags{display:flex;flex-wrap:wrap;gap:8px}
+    .badge{display:inline-block;padding:.35rem .6rem;border-radius:999px;font-size:.8rem;border:1px solid color-mix(in oklab,var(--ink) 12%,transparent);background:color-mix(in oklab,var(--panel) 85%,transparent)}
     footer{margin:40px 0 20px;color:var(--muted);text-align:center}
-    .modal{display:none;position:fixed;z-index:100;left:0;top:0;width:100%;height:100%;
-      background-color:rgba(0,0,0,0.75);align-items:center;justify-content:center;}
-    .modal-content{background:var(--panel);padding:25px;border-radius:18px;max-width:600px;
-      box-shadow:var(--shadow);animation:fadeIn .3s ease-in-out;}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-    .close{float:right;font-size:1.4rem;cursor:pointer;color:var(--muted);}
-    .modal-content {
-  background: var(--panel);
-  padding: 25px;
-  border-radius: 18px;
-  max-width: 700px;
-  max-height: 80vh;
-  overflow-y: auto;  /* enables vertical scrolling if content is tall */
-  box-shadow: var(--shadow);
-  animation: fadeInUp 0.35s ease-in-out;
-  scrollbar-width: thin;
-  scrollbar-color: var(--brand) var(--panel);
-}
 
-.charts-container {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  text-align: center;
-}
-
-.charts-container img {
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.charts-container img:hover {
-  transform: scale(1.02);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-}
-
-@keyframes fadeInUp {
-  from {opacity: 0; transform: translateY(20px);}
-  to {opacity: 1; transform: translateY(0);}
-}
-
+    /* Modal */
+    .modal{display:none;position:fixed;z-index:100;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,.75);align-items:center;justify-content:center}
+    .modal-content{background:var(--panel);padding:25px;border-radius:18px;max-width:700px;max-height:80vh;overflow-y:auto;box-shadow:var(--shadow);animation:fadeInUp .35s ease-in-out}
+    .close{float:right;font-size:1.4rem;cursor:pointer;color:var(--muted)}
+    .charts-container{margin-top:18px;display:flex;flex-direction:column;gap:18px;text-align:center}
+    .charts-container img{width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
   </style>
 
   <script>
-    const applyTheme=()=>{const t=localStorage.getItem('theme')||'dark';
-      t==='light'?document.documentElement.setAttribute('data-theme','light'):
-      document.documentElement.removeAttribute('data-theme');};
+    const applyTheme=()=>{const t=localStorage.getItem('theme')||'dark'; t==='light'?document.documentElement.setAttribute('data-theme','light'):document.documentElement.removeAttribute('data-theme');};
     applyTheme();
-    function toggleTheme(){
-      const isLight=document.documentElement.getAttribute('data-theme')==='light';
-      localStorage.setItem('theme',isLight?'dark':'light');applyTheme();}
-
+    function toggleTheme(){const isLight=document.documentElement.getAttribute('data-theme')==='light';localStorage.setItem('theme',isLight?'dark':'light');applyTheme();}
     function openModal(id){document.getElementById(id).style.display='flex';}
     function closeModal(id){document.getElementById(id).style.display='none';}
   </script>
@@ -146,7 +97,7 @@
       <div class="actions">
         <a class="btn btn-outline" href="#contact">Contact</a>
         <a class="btn" href="#projects">Projects</a>
-        <a class="btn" href="HadillZaherCV.docx.pdf" target="_blank">Download CV</a>
+        <a class="btn" href="HadillZaherCV.docx.pdf" target="_blank" rel="noopener">Download CV</a>
         <button class="btn" onclick="toggleTheme()">🌗</button>
       </div>
     </div>
@@ -207,82 +158,53 @@
         <p class="muted">Modelled portfolio volatility and Value at Risk (VaR) using Monte Carlo simulations with NumPy and probability functions.</p>
       </article>
 
-      <!-- NEW PROJECT -->
+      <!-- Fintech vs Banks project card (opens modal) -->
       <article class="card">
         <h3>📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
         <p class="muted">
-          Built a Python-based financial analytics model comparing fintech and traditional banks over a 3-year horizon. 
-          Automated data collection with <code>yfinance</code>, calculated Sharpe ratios, volatility, and drawdowns, and exported results to Excel with dynamic visuals.
+          Python-based comparison of fintech vs banks over 3 years: automated data via <code>yfinance</code>, Sharpe/volatility/drawdowns, and an Excel report with visuals.
         </p>
         <button class="btn" onclick="openModal('modal1')">View Analysis</button>
       </article>
     </section>
 
-   <!-- Modal Popup (charts ONLY appear here) -->
-<div id="modal1" class="modal" onclick="if(event.target==this)closeModal('modal1')">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('modal1')">&times;</span>
-    <h3>📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
-    <p class="muted">
-      This project used <b>Python (pandas, numpy, matplotlib, yfinance)</b> to analyze 3 years of market data for fintech firms 
-      (<b>PayPal, Adyen, Wise, Block</b>) versus major banks (<b>JPMorgan, Goldman Sachs, HSBC</b>). 
-      We computed <b>annualized returns, volatility, Sharpe ratios, drawdowns, and correlations</b>.
-    </p>
+    <!-- Modal Popup (charts ONLY appear here) -->
+    <div id="modal1" class="modal" onclick="if(event.target===this)closeModal('modal1')">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal1')">&times;</span>
+        <h3>📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
+        <p class="muted">
+          Built with <b>pandas, numpy, matplotlib, yfinance</b>. Metrics: <b>annualized return, volatility, Sharpe, drawdown, correlations</b>.
+          Outputs: <b>Fintech_vs_Banks_3Y_Report.xlsx</b>.
+        </p>
 
-    <ul class="muted">
-      <li>📈 <b>Cumulative Return Chart:</b> 3-year comparative performance</li>
-      <li>📊 <b>Rolling 6-Month Sharpe Ratios:</b> risk-adjusted returns</li>
-      <li>📉 <b>Correlation Heatmap:</b> inter-asset relationships</li>
-      <li>📘 <b>Excel Dashboard:</b> automated summary with metrics & visuals</li>
-    </ul>
+        <ul class="muted">
+          <li>📈 <b>Cumulative Return Chart:</b> 3-year comparative performance</li>
+          <li>📊 <b>Rolling 6-Month Sharpe:</b> risk-adjusted returns</li>
+          <li>📉 <b>Correlation Heatmap:</b> diversification insight</li>
+          <li>📘 <b>Excel Dashboard:</b> automated summary & visuals</li>
+        </ul>
 
-    <!-- Charts are ONLY in the modal -->
-    <div class="charts-container">
-      <div>
-        <img src="assets/fintech_banks_cumulative.png?v=4" alt="Cumulative Returns Chart">
-        <p class="muted" style="font-size:0.9rem;margin-top:4px;">Figure 1: Cumulative Returns (3-Year)</p>
+        <div class="charts-container">
+          <div>
+            <img src="assets/fintech_banks_cumulative.png?v=7" alt="Cumulative Returns Chart">
+            <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 1: Cumulative Returns (3-Year)</p>
+          </div>
+          <div>
+            <img src="assets/rolling_sharpe.png?v=7" alt="Rolling Sharpe Ratios Chart">
+            <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 2: Rolling 6-Month Sharpe</p>
+          </div>
+          <div>
+            <img src="assets/correlation_heatmap.png?v=7" alt="Correlation Heatmap Chart">
+            <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 3: Correlation Heatmap</p>
+          </div>
+        </div>
+
+        <div style="margin-top:22px;text-align:center;">
+          <a class="btn" href="Fintech_vs_Banks_3Y_Report.xlsx?v=7" target="_blank" download>📥 Download Excel Report</a>
+        </div>
       </div>
-
-      <div>
-        <img src="assets/rolling_sharpe.png?v=4" alt="Rolling Sharpe Ratios Chart">
-        <p class="muted" style="font-size:0.9rem;margin-top:4px;">Figure 2: Rolling 6-Month Sharpe Ratios</p>
-      </div>
-
-      <div>
-        <img src="assets/correlation_heatmap.png?v=4" alt="Correlation Heatmap Chart">
-        <p class="muted" style="font-size:0.9rem;margin-top:4px;">Figure 3: Correlation Heatmap</p>
-      </div>
     </div>
-
-    <!-- Excel download -->
-    <div style="margin-top:25px; text-align:center;">
-      <a class="btn" href="Fintech_vs_Banks_3Y_Report.xlsx?v=4" target="_blank" download>
-        📥 Download Excel Report
-      </a>
-    </div>
-  </div>
-</div>
-
-
-
-    <!-- Charts container -->
-    <div class="charts-container">
-      <img src="assets/fintech_banks_cumulative.png" alt="Cumulative Returns Chart">
-      <img src="assets/rolling_sharpe.png" alt="Rolling Sharpe Ratios Chart">
-      <img src="assets/correlation_heatmap.png" alt="Correlation Heatmap Chart">
-    </div>
-
-    <!-- Download Excel button -->
-    <div style="margin-top:20px; text-align:center;">
-      <a class="btn" href="Fintech_vs_Banks_3Y_Report.xlsx" target="_blank" download>
-        📥 Download Excel Report
-      </a>
-    </div>
-  </div>
-</div>
-
-
-
 
     <!-- Contact -->
     <div class="section-title" id="contact"><h2>Contact</h2></div>
