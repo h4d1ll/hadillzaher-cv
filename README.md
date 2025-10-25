@@ -37,11 +37,3 @@ My goal is to pursue a career in **high finance**, with interests spanning:
 | Version Control | Git & GitHub |
 | Hosting | GitHub Pages |
 
----
-
-## 🧩 How to View Locally
-To run the project locally:
-```bash
-git clone https://github.com/h4d1ll/hadillzaher-cv.git
-cd hadillzaher-cv
-open index.html
