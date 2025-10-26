@@ -17,73 +17,98 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    :root{ --bg:#0b0f17;--panel:#0f172a;--ink:#e5e7eb;--muted:#9ca3af;
-      --brand:#22d3ee;--brand-2:#a78bfa;--accent:#34d399;--link:#38bdf8;
-      --ring:rgba(56,189,248,.35);--shadow:0 10px 30px rgba(0,0,0,.35); }
-    [data-theme="light"]{
-      --bg:#fff;--panel:#f8fafc;--ink:#0f172a;--muted:#475569;
-      --brand:#0ea5e9;--brand-2:#7c3aed;--accent:#059669;--link:#0ea5e9;
-      --ring:rgba(14,165,233,.35);--shadow:0 10px 30px rgba(2,6,23,.08); }
-    *{box-sizing:border-box}
-    body{ margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      color:var(--ink);
-      background:radial-gradient(1200px 600px at 80% -10%,rgba(124,58,237,.15),transparent 60%),
-                 radial-gradient(900px 500px at -10% 10%,rgba(34,211,238,.18),transparent 60%),
-                 var(--bg); line-height:1.6; }
-    a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
-    .container{width:min(100%,1100px);margin-inline:auto;padding:24px}
-    header.hero{position:sticky;top:0;z-index:50; backdrop-filter:saturate(160%) blur(10px);
-      background:color-mix(in oklab,var(--bg) 85%,transparent);
-      border-bottom:1px solid color-mix(in oklab,var(--ink) 15%,transparent); }
-    .hero-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px}
-    .brand{display:flex;align-items:center;gap:14px}
-    .avatar{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;color:#0b0f17;font-weight:800}
-    .name{font-weight:700;font-size:1.15rem}
-    .role{color:var(--muted);font-size:.95rem}
-    .actions{display:flex;gap:10px;align-items:center}
-    .btn {
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 14px;
-  border-radius:12px;
-  background:var(--panel);
-  color:var(--ink);
-  border:1px solid color-mix(in oklab,var(--ink) 12%,transparent);
-  box-shadow:var(--shadow);
-  cursor:pointer;
-  transition:all .25s ease;
-}
+  :root {
+    --bg:#0b0f17;--panel:#0f172a;--ink:#f3f4f6;--muted:#9ca3af;
+    --brand:#22d3ee;--brand-2:#a78bfa;--accent:#34d399;--link:#38bdf8;
+    --ring:rgba(56,189,248,.35);--shadow:0 8px 24px rgba(0,0,0,.25);
+  }
+  [data-theme="light"] {
+    --bg:#fff;--panel:#f8fafc;--ink:#111827;--muted:#475569;
+    --brand:#0ea5e9;--brand-2:#7c3aed;--accent:#059669;--link:#0ea5e9;
+    --ring:rgba(14,165,233,.35);--shadow:0 8px 24px rgba(2,6,23,.08);
+  }
 
-.btn:hover {
-  transform:translateY(-2px);
-  background:linear-gradient(135deg, var(--brand), var(--brand-2));
-  color:#0b0f17;
-  border-color:transparent;
-}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{scroll-behavior:smooth;line-height:1.6;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+  
+  a{color:var(--link);text-decoration:none;outline:none}
+  a:focus-visible,button:focus-visible,input:focus-visible {
+    outline:2px solid var(--brand);outline-offset:3px;
+  }
+  a:hover{text-decoration:underline}
 
-    .btn-outline{background:transparent}
-    main{padding-top:30px}
-    section{scroll-margin-top:80px;}
-    .grid{display:grid;gap:18px}
-    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-    @media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}}
-    .card{background:linear-gradient(180deg,color-mix(in oklab,var(--panel) 94%,transparent),color-mix(in oklab,var(--panel) 96%,transparent));border:1px solid color-mix(in oklab,var(--ink) 12%,transparent);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
-    .muted{color:var(--muted)}
-    .section-title{display:flex;align-items:center;gap:10px;margin:30px 0 12px}
-    .section-title h2{margin:0;font-size:1.35rem}
-    .badge{display:inline-block;padding:.35rem .6rem;border-radius:999px;font-size:.8rem;border:1px solid color-mix(in oklab,var(--ink) 12%,transparent);background:color-mix(in oklab,var(--panel) 85%,transparent)}
-    footer{margin:40px 0 20px;color:var(--muted);text-align:center}
+  .container{width:min(100%,1100px);margin-inline:auto;padding:24px}
+  header.hero{position:sticky;top:0;z-index:50;backdrop-filter:saturate(160%) blur(10px);
+    background:color-mix(in oklab,var(--bg) 85%,transparent);
+    border-bottom:1px solid color-mix(in oklab,var(--ink) 15%,transparent);}
+  .hero-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:14px;flex:1 1 auto;min-width:200px}
+  .avatar{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;color:#0b0f17;font-weight:800}
+  .name{font-weight:700;font-size:1.1rem}
+  .role{color:var(--muted);font-size:.9rem}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:flex-end}
 
-    /* Modal */
-    .modal{display:none;position:fixed;z-index:100;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,.75);align-items:center;justify-content:center}
-    .modal-content{background:var(--panel);padding:25px;border-radius:18px;max-width:700px;max-height:80vh;overflow-y:auto;box-shadow:var(--shadow);animation:fadeInUp .35s ease-in-out}
-    .close{float:right;font-size:1.4rem;cursor:pointer;color:var(--muted)}
-    .charts-container{margin-top:18px;display:flex;flex-direction:column;gap:18px;text-align:center}
-    .charts-container img{width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
-    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-  </style>
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;
+    background:var(--panel);color:var(--ink);border:1px solid color-mix(in oklab,var(--ink) 12%,transparent);
+    box-shadow:var(--shadow);cursor:pointer;transition:all .25s ease;font-weight:500;
+  }
+  .btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#0b0f17;border-color:transparent;}
+  .btn-outline{background:transparent}
+  .btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+
+  main{padding-top:30px}
+  section{scroll-margin-top:80px;}
+  .grid{display:grid;gap:18px}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .card{background:linear-gradient(180deg,color-mix(in oklab,var(--panel) 94%,transparent),color-mix(in oklab,var(--panel) 96%,transparent));
+    border:1px solid color-mix(in oklab,var(--ink) 12%,transparent);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+  .muted{color:var(--muted)}
+  .section-title{display:flex;align-items:center;gap:10px;margin:30px 0 12px}
+  .section-title h2{margin:0;font-size:1.35rem}
+
+  /* MODALS */
+  .modal{display:none;position:fixed;z-index:100;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,.75);align-items:center;justify-content:center}
+  .modal-content{background:var(--panel);padding:25px;border-radius:18px;max-width:700px;max-height:80vh;overflow-y:auto;box-shadow:var(--shadow);animation:fadeInUp .35s ease-in-out}
+  .close{float:right;font-size:1.4rem;cursor:pointer;color:var(--muted)}
+  .charts-container{margin-top:18px;display:flex;flex-direction:column;gap:18px;text-align:center}
+  .charts-container img{width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+  /* Lazy loading + image contrast */
+  img[loading="lazy"]{opacity:0;transition:opacity .3s ease-in-out;}
+  img:not([loading]){opacity:1;}
+
+  /* Chat + inputs accessibility */
+  #chatBox::-webkit-scrollbar{width:6px;}
+  #chatBox::-webkit-scrollbar-thumb{background:var(--muted);border-radius:3px;}
+  #userQuestion:focus{outline:none;border-color:var(--brand);box-shadow:0 0 6px var(--ring);}
+
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+  /* Market ticker */
+  #market-ticker {
+    font-family:JetBrains Mono,monospace;
+    font-size:0.9rem;
+    white-space:nowrap;
+    overflow:hidden;
+    padding:6px 10px;
+    background:#0a0f1a;
+    color:#22c55e;
+    display:block;
+  }
+  #ticker-text {display:inline-block;animation:scroll-left 25s linear infinite;}
+  @keyframes scroll-left {0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
+  @media(max-width:600px){
+    #market-ticker{font-size:0.8rem;padding:5px;}
+    #ticker-text{animation-duration:40s;}
+    .btn{padding:9px 12px;font-size:0.9rem;}
+  }
+
+  footer{margin:40px 0 20px;color:var(--muted);text-align:center;font-size:.9rem}
+</style>
+
 
   <script>
     const applyTheme=()=>{const t=localStorage.getItem('theme')||'dark'; t==='light'?document.documentElement.setAttribute('data-theme','light'):document.documentElement.removeAttribute('data-theme');};
@@ -147,8 +172,8 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
     </section>
 
     <!-- Projects -->
-    <div class="section-title" id="projects"><h2>Projects &amp; Research</h2></div>
-    <section class="grid grid-2">
+<div class="section-title" id="projects"><h2>Projects &amp; Research</h2></div>
+<section class="grid grid-2">
   <!-- 1) Fintech Valuation Tracker -->
   <article class="card">
     <h3>📈 Fintech Valuation Tracker</h3>
@@ -178,48 +203,50 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
   </article>
 </section>
 
+<!-- MODALS -->
 
-    <!-- MODALS -->
-    <!-- Fintech vs Banks (existing) -->
-    <div id="modal1" class="modal" onclick="if(event.target===this)closeModal('modal1')">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal('modal1')">&times;</span>
-        <h3>📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
-        <p class="muted">
-          Built with <b>pandas, numpy, matplotlib, yfinance</b>. Metrics: <b>annualized return, volatility, Sharpe, drawdown, correlations</b>.
-          Outputs: <b>Fintech_vs_Banks_3Y_Report.xlsx</b>.
-        </p>
-        <ul class="muted">
-          <li>📈 <b>Cumulative Return Chart:</b> 3-year comparative performance</li>
-          <li>📊 <b>Rolling 6-Month Sharpe:</b> risk-adjusted returns</li>
-          <li>📉 <b>Correlation Heatmap:</b> diversification insight</li>
-          <li>📘 <b>Excel Dashboard:</b> automated summary & visuals</li>
-        </ul>
-        <div class="charts-container">
-          <div>
-            <img src="assets/fintech_banks_cumulative.png?v=8" alt="Cumulative Returns Chart" loading="lazy" onerror="this.style.display='none'">
-            <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 1: Cumulative Returns (3-Year)</p>
-          </div>
-          <div>
-            <img src="assets/rolling_sharpe.png?v=8" alt="Rolling Sharpe Ratios Chart" loading="lazy" onerror="this.style.display='none'">
-            <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 2: Rolling 6-Month Sharpe</p>
-          </div>
-          <div>
-            <img src="assets/correlation_heatmap.png?v=8" alt="Correlation Heatmap Chart" loading="lazy" onerror="this.style.display='none'">
-            <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 3: Correlation Heatmap</p>
-          </div>
-        </div>
-        <div style="margin-top:22px;text-align:center;">
-          <a class="btn" href="Fintech_vs_Banks_3Y_Report.xlsx?v=8" target="_blank" rel="noopener" download>📥 Download Excel Report</a>
-        </div>
+<!-- Fintech vs Banks -->
+<div id="modal1" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal1Title"
+     onclick="if(event.target===this)closeModal('modal1')">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal1')" aria-label="Close dialog">&times;</span>
+    <h3 id="modal1Title">📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
+    <p class="muted">
+      Built with <b>pandas, numpy, matplotlib, yfinance</b>. Metrics: <b>annualized return, volatility, Sharpe, drawdown, correlations</b>.
+      Outputs: <b>Fintech_vs_Banks_3Y_Report.xlsx</b>.
+    </p>
+    <ul class="muted">
+      <li>📈 <b>Cumulative Return Chart:</b> 3-year comparative performance</li>
+      <li>📊 <b>Rolling 6-Month Sharpe:</b> risk-adjusted returns</li>
+      <li>📉 <b>Correlation Heatmap:</b> diversification insight</li>
+      <li>📘 <b>Excel Dashboard:</b> automated summary & visuals</li>
+    </ul>
+    <div class="charts-container">
+      <div>
+        <img src="assets/fintech_banks_cumulative.png?v=8" alt="Cumulative Returns Chart" loading="lazy" onerror="this.style.display='none'">
+        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 1: Cumulative Returns (3-Year)</p>
+      </div>
+      <div>
+        <img src="assets/rolling_sharpe.png?v=8" alt="Rolling Sharpe Ratios Chart" loading="lazy" onerror="this.style.display='none'">
+        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 2: Rolling 6-Month Sharpe</p>
+      </div>
+      <div>
+        <img src="assets/correlation_heatmap.png?v=8" alt="Correlation Heatmap Chart" loading="lazy" onerror="this.style.display='none'">
+        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 3: Correlation Heatmap</p>
       </div>
     </div>
+    <div style="margin-top:22px;text-align:center;">
+      <a class="btn" href="Fintech_vs_Banks_3Y_Report.xlsx?v=8" target="_blank" rel="noopener" download>📥 Download Excel Report</a>
+    </div>
+  </div>
+</div>
 
-    <!-- Fintech Valuation Tracker modal (FINAL VERSION) -->
-<div id="modalValuation" class="modal" onclick="if(event.target===this)closeModal('modalValuation')">
+<!-- Fintech Valuation Tracker -->
+<div id="modalValuation" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalValuationTitle"
+     onclick="if(event.target===this)closeModal('modalValuation')">
   <div class="modal-content">
-    <span class="close" onclick="closeModal('modalValuation')">&times;</span>
-    <h3>📈 Fintech Valuation Tracker</h3>
+    <span class="close" onclick="closeModal('modalValuation')" aria-label="Close dialog">&times;</span>
+    <h3 id="modalValuationTitle">📈 Fintech Valuation Tracker</h3>
     <p class="muted">
       Python + Excel workflow tracking selected fintechs’ P/E and price performance. Prices via <code>yfinance</code>.
       P/E trendlines use trailing EPS where available (via quarterly earnings) and visualize valuation shifts with Matplotlib.
@@ -245,12 +272,12 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
   </div>
 </div>
 
-
-    <!-- Personal Investing Playbook modal -->
-<div id="modalPlaybook" class="modal" onclick="if(event.target===this)closeModal('modalPlaybook')">
+<!-- Personal Investing Playbook -->
+<div id="modalPlaybook" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalPlaybookTitle"
+     onclick="if(event.target===this)closeModal('modalPlaybook')">
   <div class="modal-content">
-    <span class="close" onclick="closeModal('modalPlaybook')">&times;</span>
-    <h3>💰 Personal Investing Playbook</h3>
+    <span class="close" onclick="closeModal('modalPlaybook')" aria-label="Close dialog">&times;</span>
+    <h3 id="modalPlaybookTitle">💰 Personal Investing Playbook</h3>
     <p class="muted">
       Python + Excel model simulating <b>dollar-cost averaging (DCA)</b> into a 70/30 equity-bond portfolio over 10 years.
       Tracks portfolio growth, rebalancing triggers, and return metrics using <code>numpy</code>, <code>pandas</code>, and <code>matplotlib</code>.
@@ -271,13 +298,12 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
   </div>
 </div>
 
-
-
-    <!-- Banking Crises & Stress Testing modal (UPDATED) -->
-<div id="modalStress" class="modal" onclick="if(event.target===this)closeModal('modalStress')">
+<!-- Banking Crises & Stress Testing -->
+<div id="modalStress" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalStressTitle"
+     onclick="if(event.target===this)closeModal('modalStress')">
   <div class="modal-content">
-    <span class="close" onclick="closeModal('modalStress')">&times;</span>
-    <h3>🏦 Banking Crises & Stress Testing (2024)</h3>
+    <span class="close" onclick="closeModal('modalStress')" aria-label="Close dialog">&times;</span>
+    <h3 id="modalStressTitle">🏦 Banking Crises & Stress Testing (2024)</h3>
     <p class="muted">
       Simulated case study of <b>SVB</b> and <b>Credit Suisse</b> collapses using Python — exploring <b>liquidity stress, contagion risk,</b> and <b>systemic propagation</b>.
       This model quantifies how rising rates erode bond portfolios and how defaults can spread through an interconnected banking system.
@@ -287,7 +313,6 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
       <li>🏦 <b>Contagion Network:</b> Simulated interbank exposures showing systemic propagation</li>
       <li>📘 <b>Output:</b> Excel dashboard with stress tables and embedded charts</li>
     </ul>
-
     <div class="charts-container">
       <div>
         <img src="assets/stress_liquidity.png?v=3" alt="Liquidity Stress Simulation" loading="lazy" onerror="this.style.display='none'">
@@ -298,12 +323,12 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
         <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 2: Systemic Contagion — Default Propagation</p>
       </div>
     </div>
-
     <div style="margin-top:22px;text-align:center;">
       <a class="btn" href="Banking_Stress_Testing_2024.xlsx?v=3" target="_blank" rel="noopener" download>📥 Download Excel Dashboard</a>
     </div>
   </div>
 </div>
+
 
 
     <!-- 💬 Ask Me Anything — Contextual Chat -->
@@ -314,19 +339,45 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
       Curious about finance, investing, or my work? Chat with me — I’ll remember what we talked about.
     </p>
 
-    <div id="chatBox" style="background:var(--panel);border-radius:10px;padding:12px;height:280px;overflow-y:auto;margin-top:10px;display:flex;flex-direction:column;gap:10px;">
-      <div class="bot" style="align-self:flex-start;background:rgba(255,255,255,0.05);padding:8px 12px;border-radius:10px;max-width:80%;">
+    <div id="chatBox"
+         style="background:var(--panel);border-radius:10px;padding:12px;height:280px;
+                overflow-y:auto;margin-top:10px;display:flex;flex-direction:column;gap:10px;">
+      <div class="bot"
+           style="align-self:flex-start;background:rgba(255,255,255,0.05);
+                  padding:8px 12px;border-radius:10px;max-width:80%;">
         🤖 Hi there! I’m your finance assistant — ask me anything about investing, fintech, or markets.
       </div>
     </div>
 
-    <div style="display:flex;gap:10px;margin-top:12px;">
-      <input id="userQuestion" type="text" placeholder="Type your question here..." 
-             style="flex:1;padding:10px 12px;border-radius:10px;border:1px solid #333;background:var(--panel);color:var(--ink);">
-      <button class="btn" onclick="sendQuestion()">Send</button>
+    <!-- Updated input section for accessibility -->
+    <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">
+      <label for="userQuestion" class="sr-only">Ask your question</label>
+      <input id="userQuestion"
+             type="text"
+             aria-label="Ask your question"
+             placeholder="Type your question here..."
+             style="flex:1 1 240px;padding:10px 12px;border-radius:10px;
+                    border:1px solid #333;background:var(--panel);color:var(--ink);
+                    font-size:1rem;"
+             autocomplete="off" />
+      <button class="btn" onclick="sendQuestion()" aria-label="Send your question">Send</button>
     </div>
   </div>
 </section>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
 
 <script>
 let chatHistory = [];
@@ -362,7 +413,6 @@ async function sendQuestion() {
   let answer = "";
 
   try {
-    // ✅ FIXED: send { message } to backend instead of { question }
     const res = await fetch("https://hadillzaher-cv.onrender.com/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -394,8 +444,6 @@ document.getElementById("userQuestion").addEventListener("keypress", (e) => {
   if (e.key === "Enter") sendQuestion();
 });
 </script>
-
-
 
 
 
