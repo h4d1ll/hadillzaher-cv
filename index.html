@@ -360,7 +360,7 @@ async function sendQuestion() {
     const res = await fetch("https://hadillzaher-cv.onrender.com/ask", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ message: question })
+body: JSON.stringify({ message: question })
 });
 
     const data = await res.json();
