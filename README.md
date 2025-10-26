@@ -28,12 +28,14 @@ My goal is to pursue a career in **high finance**, with interests spanning:
 
 ---
 
-## ⚙️ Technologies Used
+### ⚙️ Technologies Used
+
 | Purpose | Technology |
 |----------|-------------|
-| Structure | HTML5 |
-| Styling | CSS3 |
-| Scripting | JavaScript |
-| Version Control | Git & GitHub |
-| Hosting | GitHub Pages |
+| Structure | **HTML5** |
+| Styling | **CSS3** |
+| Scripting | **JavaScript** |
+| Data Analysis & Dashboards | **Python (pandas, matplotlib, yfinance, xlsxwriter)** |
+| Version Control | **Git & GitHub** |
+| Hosting | **GitHub Pages** |
 
