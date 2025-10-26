@@ -113,115 +113,6 @@
     </div>
   </header>
 
- <!-- 📈 Live Market Ticker + Popup Dashboard -->
-<!-- Visible scrolling ticker -->
-<div id="market-ticker" style="background:#0a0f1a;color:#22c55e;font-family:monospace;white-space:nowrap;overflow:hidden;padding:8px 12px;">
-  <span id="ticker-text">Loading market data...</span>
-</div>
-
-<!-- 💹 Popup Market Overview Modal -->
-<div id="marketModal" class="modal" style="display:none;position:fixed;z-index:100;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,.7);align-items:center;justify-content:center;">
-  <div class="modal-content" style="background:#111827;padding:20px;border-radius:12px;max-width:600px;width:90%;max-height:80vh;overflow-y:auto;color:#e5e7eb;">
-    <span onclick="closeMarketModal()" style="float:right;cursor:pointer;font-size:1.4rem;color:#9ca3af;">✕</span>
-    <h3 style="margin-bottom:12px;">📊 Live Market Overview</h3>
-    <table style="width:100%;border-collapse:collapse;text-align:left;">
-      <thead>
-        <tr style="color:#9ca3af;border-bottom:1px solid #333;">
-          <th>Asset</th><th style="text-align:right;">Price</th><th style="text-align:right;">Change</th><th style="text-align:center;">Trend</th>
-        </tr>
-      </thead>
-      <tbody id="market-body">
-        <tr><td colspan="4" style="text-align:center;color:#9ca3af;">Loading...</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- 🪙 Market Ticker Script -->
-<script>
-const FINNHUB_API_KEY = "d3v0vrpr01qil4as7h20d3v0vrpr01qil4as7h2g"; // your real key stays in quotes
-const SYMBOLS = [
-  { name: "Apple", symbol: "AAPL" },
-  { name: "Microsoft", symbol: "MSFT" },
-  { name: "Bitcoin", symbol: "BINANCE:BTCUSDT" },
-  { name: "S&P500", symbol: "SPY" },
-  { name: "GBP/USD", symbol: "OANDA:GBP_USD" }
-];
-
-async function fetchMarketData() {
-  let tickerHTML = "";
-  let tableHTML = "";
-
-  for (let { name, symbol } of SYMBOLS) {
-    try {
-      const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_API_KEY}`;
-      const res = await fetch(url);
-      const data = await res.json();
-
-      if (!data || !data.c) throw new Error("No data");
-
-      const price = data.c.toFixed(2);
-      const prevClose = data.pc || price;
-      const change = price - prevClose;
-      const changePct = ((change / prevClose) * 100).toFixed(2);
-      const color = change > 0 ? "#22c55e" : change < 0 ? "#ef4444" : "#facc15";
-      const trend = change > 0 ? "▲" : change < 0 ? "▼" : "–";
-
-      tickerHTML += `
-        <a href="https://finance.yahoo.com/quote/${symbol.replace('BINANCE:','').replace('OANDA:','')}" target="_blank" rel="noopener"
-           style="color:inherit;text-decoration:none;margin-right:18px;">
-          ${name}: <span style="color:${color}">${price}</span>
-          <span class="change" style="opacity:0;color:${color};font-size:0.85rem;">(${changePct}%)</span> │
-        </a>`;
-
-      tableHTML += `
-        <tr>
-          <td>${name}</td>
-          <td align="right" style="color:${color}">${price}</td>
-          <td align="right" style="color:${color}">${changePct}%</td>
-          <td align="center" style="color:${color};font-weight:bold;">${trend}</td>
-        </tr>`;
-    } catch {
-      tickerHTML += ` ${name}: <span style='color:gray;'>N/A</span> │`;
-    }
-  }
-
-  document.getElementById("ticker-text").innerHTML = tickerHTML;
-  document.getElementById("market-body").innerHTML = tableHTML;
-
-  document.querySelectorAll('#market-ticker a').forEach(a => {
-    a.addEventListener('mouseenter', () => a.querySelector('.change').style.opacity = 1);
-    a.addEventListener('mouseleave', () => a.querySelector('.change').style.opacity = 0);
-  });
-}
-
-function openMarketModal() {
-  document.getElementById("marketModal").style.display = "flex";
-}
-function closeMarketModal() {
-  document.getElementById("marketModal").style.display = "none";
-}
-
-fetchMarketData();
-setInterval(fetchMarketData, 30000);
-</script>
-
-<style>
-/* Smooth scrolling ticker animation */
-#market-ticker {
-  animation: scroll-left 25s linear infinite;
-}
-@keyframes scroll-left {
-  0% { text-indent: 100%; }
-  100% { text-indent: -100%; }
-}
-</style>
-
-<!-- Button to open modal -->
-<button class="btn" onclick="openMarketModal()">💹 Market Overview</button>
-
-
-
 
 
   <main class="container">
@@ -415,32 +306,97 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
 </div>
 
 
-  <!-- 💬 Ask Me Anything Widget -->
-<section id="ask-me" class="p-6 text-center bg-[#0a0f1a] text-white rounded-2xl shadow-lg mt-10">
-  <h3 class="text-xl font-semibold mb-3">💬 Ask Me Anything</h3>
-  <p class="text-sm text-gray-400 mb-4">Curious about finance, investing, or my projects? Click below to learn more.</p>
-  
-  <div class="flex justify-center flex-wrap gap-3">
-    <button class="bg-[#1e293b] hover:bg-[#334155] text-white py-2 px-4 rounded-lg" onclick="showAnswer('dca')">💰 What is DCA?</button>
-    <button class="bg-[#1e293b] hover:bg-[#334155] text-white py-2 px-4 rounded-lg" onclick="showAnswer('crisis')">🏦 Lessons from 2023 Crises?</button>
-    <button class="bg-[#1e293b] hover:bg-[#334155] text-white py-2 px-4 rounded-lg" onclick="showAnswer('quant')">📊 How do you use Python?</button>
-    <button class="bg-[#1e293b] hover:bg-[#334155] text-white py-2 px-4 rounded-lg" onclick="showAnswer('wealth')">📈 Best wealth tip?</button>
-  </div>
+  <!-- 💬 Ask Me Anything — Contextual Chat -->
+<section id="askme" class="container">
+  <div class="card">
+    <h2>💬 Ask Me Anything</h2>
+    <p class="muted">Curious about finance, investing, or my work? Chat with me — I’ll remember what we talked about.</p>
 
-  <div id="answer-box" class="mt-6 text-base text-[#9ca3af]"></div>
+    <div id="chatBox" style="background:var(--panel);border-radius:10px;padding:12px;height:280px;overflow-y:auto;margin-top:10px;display:flex;flex-direction:column;gap:10px;">
+      <div class="bot" style="align-self:flex-start;background:rgba(255,255,255,0.05);padding:8px 12px;border-radius:10px;max-width:80%;">
+        🤖 Hi there! I’m your finance assistant — ask me anything about investing, fintech, or markets.
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;margin-top:12px;">
+      <input id="userQuestion" type="text" placeholder="Type your question here..." 
+             style="flex:1;padding:10px 12px;border-radius:10px;border:1px solid #333;background:var(--panel);color:var(--ink);">
+      <button class="btn" onclick="sendQuestion()">Send</button>
+    </div>
+  </div>
 </section>
 
 <script>
-function showAnswer(topic) {
-  const answers = {
-    dca: "DCA (Dollar Cost Averaging) means investing a fixed amount regularly, regardless of price. It smooths volatility and builds long-term wealth.",
-    crisis: "The 2023 SVB and Credit Suisse crises showed how liquidity and confidence are intertwined — even well-capitalized banks can fall if trust evaporates.",
-    quant: "I use Python for valuation models, stress testing, and market analytics — leveraging Pandas, NumPy, and Matplotlib for financial insights.",
-    wealth: "Start early, stay consistent, diversify, and reinvest. Time in the market beats timing the market every time."
-  };
-  document.getElementById('answer-box').innerHTML = `<p class='italic text-[#facc15] mt-2'>${answers[topic]}</p>`;
+let chatHistory = [];
+
+async function sendQuestion() {
+  const input = document.getElementById("userQuestion");
+  const chat = document.getElementById("chatBox");
+  const question = input.value.trim();
+  if (!question) return;
+
+  // Show user message
+  const userMsg = document.createElement("div");
+  userMsg.className = "user";
+  userMsg.style.cssText = "align-self:flex-end;background:var(--brand);color:#0b0f17;padding:8px 12px;border-radius:10px;max-width:80%;animation:fadeIn .3s ease;";
+  userMsg.textContent = question;
+  chat.appendChild(userMsg);
+  chat.scrollTop = chat.scrollHeight;
+  input.value = "";
+
+  // Add temporary "thinking" bubble
+  const botMsg = document.createElement("div");
+  botMsg.className = "bot";
+  botMsg.style.cssText = "align-self:flex-start;background:rgba(255,255,255,0.05);padding:8px 12px;border-radius:10px;max-width:80%;color:var(--muted);font-style:italic;";
+  botMsg.textContent = "🤔 Thinking...";
+  chat.appendChild(botMsg);
+  chat.scrollTop = chat.scrollHeight;
+
+  // Update chat history
+  chatHistory.push({ role: "user", content: question });
+
+  // Try to find context-aware answer
+  let context = chatHistory.map(m => m.role === "user" ? `User: ${m.content}` : `Bot: ${m.content}`).join("\n");
+  let answer = "";
+
+  try {
+    // Fetch factual snippet from DuckDuckGo
+    const url = `https://api.duckduckgo.com/?q=${encodeURIComponent(question)}&format=json&no_redirect=1`;
+    const res = await fetch(url);
+    const data = await res.json();
+    let fact = data.AbstractText || data.Answer || data.Heading || "";
+
+    // Blend context + fact for a conversational tone
+    if (fact) {
+      answer = `That’s a great question. Based on what I’ve found, ${fact.toLowerCase()}.`;
+    } else if (question.toLowerCase().includes("you") || question.toLowerCase().includes("hadill")) {
+      answer = "I'm your virtual assistant! I help answer questions about Hadill Zaher, finance, and investing.";
+    } else {
+      answer = "Hmm, I couldn’t find an exact answer — but I’d say it’s something worth exploring further!";
+    }
+  } catch {
+    answer = "⚠️ Sorry, I ran into a small issue fetching that.";
+  }
+
+  // Display response
+  botMsg.textContent = "💬 " + answer;
+  chatHistory.push({ role: "bot", content: answer });
+  chat.scrollTop = chat.scrollHeight;
 }
+
+document.getElementById("userQuestion").addEventListener("keypress", e => {
+  if (e.key === "Enter") sendQuestion();
+});
 </script>
+
+<style>
+@keyframes fadeIn { from {opacity:0; transform:translateY(4px);} to {opacity:1; transform:translateY(0);} }
+#chatBox::-webkit-scrollbar { width: 6px; }
+#chatBox::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
+#userQuestion:focus { outline:none; border-color:var(--brand); box-shadow:0 0 6px var(--ring); }
+</style>
+
+
 
 
 
