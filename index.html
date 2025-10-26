@@ -17,33 +17,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg:#0b0f17;--panel:#0f172a;--ink:#e5e7eb;--muted:#9ca3af;
+    :root{ --bg:#0b0f17;--panel:#0f172a;--ink:#e5e7eb;--muted:#9ca3af;
       --brand:#22d3ee;--brand-2:#a78bfa;--accent:#34d399;--link:#38bdf8;
-      --ring:rgba(56,189,248,.35);--shadow:0 10px 30px rgba(0,0,0,.35);
-    }
+      --ring:rgba(56,189,248,.35);--shadow:0 10px 30px rgba(0,0,0,.35); }
     [data-theme="light"]{
       --bg:#fff;--panel:#f8fafc;--ink:#0f172a;--muted:#475569;
       --brand:#0ea5e9;--brand-2:#7c3aed;--accent:#059669;--link:#0ea5e9;
-      --ring:rgba(14,165,233,.35);--shadow:0 10px 30px rgba(2,6,23,.08);
-    }
+      --ring:rgba(14,165,233,.35);--shadow:0 10px 30px rgba(2,6,23,.08); }
     *{box-sizing:border-box}
-    body{
-      margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    body{ margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
       color:var(--ink);
       background:radial-gradient(1200px 600px at 80% -10%,rgba(124,58,237,.15),transparent 60%),
                  radial-gradient(900px 500px at -10% 10%,rgba(34,211,238,.18),transparent 60%),
-                 var(--bg);
-      line-height:1.6;
-    }
-    a{color:var(--link);text-decoration:none}
-    a:hover{text-decoration:underline}
+                 var(--bg); line-height:1.6; }
+    a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
     .container{width:min(100%,1100px);margin-inline:auto;padding:24px}
-    header.hero{position:sticky;top:0;z-index:50;
-      backdrop-filter:saturate(160%) blur(10px);
+    header.hero{position:sticky;top:0;z-index:50; backdrop-filter:saturate(160%) blur(10px);
       background:color-mix(in oklab,var(--bg) 85%,transparent);
-      border-bottom:1px solid color-mix(in oklab,var(--ink) 15%,transparent);
-    }
+      border-bottom:1px solid color-mix(in oklab,var(--ink) 15%,transparent); }
     .hero-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px}
     .brand{display:flex;align-items:center;gap:14px}
     .avatar{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;color:#0b0f17;font-weight:800}
@@ -203,29 +194,38 @@
       </div>
     </div>
 
-    <!-- NEW: Fintech Valuation Tracker modal -->
-    <div id="modalValuation" class="modal" onclick="if(event.target===this)closeModal('modalValuation')">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal('modalValuation')">&times;</span>
-        <h3>📈 Fintech Valuation Tracker</h3>
-        <p class="muted">
-          Python + Excel workflow tracking selected fintechs’ P/E and price performance. Pulled prices via <code>yfinance</code>,
-          calculated rolling P/E (where available) or proxied valuation using price vs revenue growth, and visualized trends with Matplotlib.
-        </p>
-        <ul class="muted">
-          <li>🧮 Metrics: trailing P/E (if available), rolling returns, simple factor screens</li>
-          <li>📊 Visuals: P/E trendlines & performance overlays</li>
-          <li>📘 Output: Excel workbook with charts & filters</li>
-        </ul>
-        <div class="charts-container">
-          <!-- Optional images if you add them later -->
-          <img src="assets/valuation_pe_trends.png?v=1" alt="P/E Trendlines" loading="lazy" onerror="this.style.display='none'">
-          <img src="assets/valuation_perf_overlay.png?v=1" alt="Performance Overlay" loading="lazy" onerror="this.style.display='none'">
-        </div>
+    <!-- Fintech Valuation Tracker modal (FINAL VERSION) -->
+<div id="modalValuation" class="modal" onclick="if(event.target===this)closeModal('modalValuation')">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modalValuation')">&times;</span>
+    <h3>📈 Fintech Valuation Tracker</h3>
+    <p class="muted">
+      Python + Excel workflow tracking selected fintechs’ P/E and price performance. Prices via <code>yfinance</code>.
+      P/E trendlines use trailing EPS where available (via quarterly earnings) and visualize valuation shifts with Matplotlib.
+    </p>
+    <ul class="muted">
+      <li>🧮 Metrics: trailing P/E (if available), rolling returns, simple factor screens</li>
+      <li>📊 Visuals: P/E trendlines & performance overlays</li>
+      <li>📘 Output: Excel workbook with charts & filters</li>
+    </ul>
+    <div class="charts-container">
+      <div>
+        <img src="assets/fintech_prices_normalized.png?v=2" alt="Fintech Prices (Indexed to 100)" loading="lazy" onerror="this.style.display='none'">
+        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 1: Fintech Price Performance (Indexed to 100)</p>
+      </div>
+      <div>
+        <img src="assets/fintech_pe_quarterly.png?v=2" alt="Fintech P/E Trendlines (Quarterly)" loading="lazy" onerror="this.style.display='none'">
+        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 2: Fintech P/E Trendlines — Quarterly (Price / TTM EPS)</p>
       </div>
     </div>
+    <div style="margin-top:22px;text-align:center;">
+      <a class="btn" href="Fintech_PE_Dashboard.xlsx?v=2" target="_blank" rel="noopener" download>📥 Download Excel Dashboard</a>
+    </div>
+  </div>
+</div>
 
-    <!-- NEW: Personal Investing Playbook modal -->
+
+    <!-- Personal Investing Playbook modal -->
     <div id="modalPlaybook" class="modal" onclick="if(event.target===this)closeModal('modalPlaybook')">
       <div class="modal-content">
         <span class="close" onclick="closeModal('modalPlaybook')">&times;</span>
@@ -246,7 +246,7 @@
       </div>
     </div>
 
-    <!-- NEW: Banking Crises & Stress Testing modal -->
+    <!-- Banking Crises & Stress Testing modal -->
     <div id="modalStress" class="modal" onclick="if(event.target===this)closeModal('modalStress')">
       <div class="modal-content">
         <span class="close" onclick="closeModal('modalStress')">&times;</span>
