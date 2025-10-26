@@ -365,7 +365,34 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
       View Analysis
     </button>
   </article>
+
+<!-- 🌱 ESG & Sustainable Investing Dashboard -->
+<article class="card" role="article">
+  <h3>🌱 ESG & Sustainable Investing Dashboard</h3>
+  <p class="muted">
+    Python + Excel project analyzing ESG (Environmental, Social, Governance) scores vs financial performance across 20 firms.
+    Correlates ESG ratings with returns and volatility using <code>pandas</code> and <code>matplotlib</code>.
+  </p>
+  <button class="btn" onclick="openModal('modalESG')" aria-haspopup="dialog" aria-controls="modalESG">
+    View Analysis
+  </button>
+</article>
+
+<!-- 💳 Credit Risk Modelling -->
+<article class="card" role="article">
+  <h3>💳 Credit Risk Modelling & Loan Default Simulation</h3>
+  <p class="muted">
+    Machine learning model estimating probability of default (PD) using <b>logistic regression</b> and <b>Monte Carlo simulations</b>.
+    Generates risk curves and visualizes default distributions.
+  </p>
+  <button class="btn" onclick="openModal('modalCredit')" aria-haspopup="dialog" aria-controls="modalCredit">
+    View Analysis
+  </button>
+</article>
+
 </section>
+
+  
 
 <!-- === MODALS === -->
 
@@ -491,6 +518,61 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
     </div>
     <div style="margin-top:22px;text-align:center;">
       <a class="btn" href="Banking_Stress_Testing_2024.xlsx?v=10" target="_blank" rel="noopener" download>📥 Download Excel Dashboard</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- 🌱 ESG & Sustainable Investing Modal --<!-- 🌱 ESG & Sustainable Investing Modal -->
+<div id="modalESG" class="modal" role="dialog" aria-labelledby="modalESG-title" aria-modal="true" onclick="if(event.target===this)closeModal('modalESG')">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('modalESG')" aria-label="Close dialog">&times;</button>
+    <h3 id="modalESG-title">🌱 ESG & Sustainable Investing Dashboard</h3>
+    <p class="muted">
+      Examines ESG scores vs returns and volatility using <b>pandas, seaborn, matplotlib</b>.
+      Highlights whether higher ESG ratings align with lower risk or improved performance.
+    </p>
+    <ul class="muted">
+      <li>📈 <b>ESG Score vs Return Scatter:</b> visualizing correlation</li>
+      <li>📊 <b>Volatility by ESG Tier:</b> risk distribution across quartiles</li>
+      <li>📘 <b>Excel Dashboard:</b> pivoted ESG, performance, and sector filters</li>
+    </ul>
+    <div class="charts-container">
+      <img src="assets/esg_scatter.png?v=1" alt="ESG vs Return Scatter" loading="lazy">
+      <p class="muted">Figure 1: ESG Score vs Annual Return</p>
+      <img src="assets/esg_volatility.png?v=1" alt="Volatility by ESG Tier" loading="lazy">
+      <p class="muted">Figure 2: Volatility by ESG Tier</p>
+    </div>
+    <div style="margin-top:22px;text-align:center;">
+      <a class="btn" href="ESG_Sustainable_Investing_Dashboard.xlsx?v=1" target="_blank" rel="noopener" download>📥 Download Excel Dashboard</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- 💳 Credit Risk Modelling Modal -->
+<div id="modalCredit" class="modal" role="dialog" aria-labelledby="modalCredit-title" aria-modal="true" onclick="if(event.target===this)closeModal('modalCredit')">
+  <div class="modal-content">
+    <button class="close" onclick="closeModal('modalCredit')" aria-label="Close dialog">&times;</button>
+    <h3 id="modalCredit-title">💳 Credit Risk Modelling & Loan Default Simulation</h3>
+    <p class="muted">
+      Simulates portfolio credit risk using <b>Python (pandas, numpy, scikit-learn)</b>.
+      Models default probability based on income, loan size, and credit score.  
+      Includes scenario stress testing (recession vs baseline).
+    </p>
+    <ul class="muted">
+      <li>📉 <b>Default Probability Curve:</b> PD vs Credit Score</li>
+      <li>📊 <b>Portfolio Loss Distribution:</b> Monte Carlo outcomes</li>
+      <li>📘 <b>Excel Dashboard:</b> adjustable input parameters & charts</li>
+    </ul>
+    <div class="charts-container">
+      <img src="assets/credit_pd_curve.png?v=1" alt="Probability of Default Curve" loading="lazy">
+      <p class="muted">Figure 1: Probability of Default vs Credit Score</p>
+      <img src="assets/credit_loss_dist.png?v=1" alt="Portfolio Loss Distribution" loading="lazy">
+      <p class="muted">Figure 2: Simulated Portfolio Loss Distribution</p>
+    </div>
+    <div style="margin-top:22px;text-align:center;">
+      <a class="btn" href="Credit_Risk_Model_Dashboard.xlsx?v=1" target="_blank" rel="noopener" download>📥 Download Excel Dashboard</a>
     </div>
   </div>
 </div>
