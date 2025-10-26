@@ -41,8 +41,27 @@
     .name{font-weight:700;font-size:1.15rem}
     .role{color:var(--muted);font-size:.95rem}
     .actions{display:flex;gap:10px;align-items:center}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:var(--panel);color:var(--ink);border:1px solid color-mix(in oklab,var(--ink) 12%,transparent);box-shadow:var(--shadow);cursor:pointer}
-    .btn:hover{transform:translateY(-1px)}
+    .btn {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  border-radius:12px;
+  background:var(--panel);
+  color:var(--ink);
+  border:1px solid color-mix(in oklab,var(--ink) 12%,transparent);
+  box-shadow:var(--shadow);
+  cursor:pointer;
+  transition:all .25s ease;
+}
+
+.btn:hover {
+  transform:translateY(-2px);
+  background:linear-gradient(135deg, var(--brand), var(--brand-2));
+  color:#0b0f17;
+  border-color:transparent;
+}
+
     .btn-outline{background:transparent}
     main{padding-top:30px}
     section{scroll-margin-top:80px;}
