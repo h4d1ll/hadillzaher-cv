@@ -114,84 +114,65 @@
   </header>
 
   <!-- 📈 Live Market Ticker + Popup Dashboard -->
-<div id="market-ticker" style="background:var(--panel);color:var(--accent);font-family:JetBrains Mono,monospace;font-size:0.9rem;overflow:hidden;white-space:nowrap;padding:8px 16px;cursor:pointer;" onclick="openMarketModal()">
-  <span id="ticker-text">Loading market data...</span>
-</div>
-
-<!-- 💼 Market Overview Modal -->
-<div id="marketModal" class="modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.75);align-items:center;justify-content:center;z-index:150;">
-  <div class="modal-content" style="background:var(--panel);padding:25px;border-radius:18px;max-width:600px;max-height:80vh;overflow-y:auto;box-shadow:var(--shadow);animation:fadeInUp .35s ease-in-out;">
-    <span style="float:right;font-size:1.4rem;cursor:pointer;color:var(--muted)" onclick="closeMarketModal()">&times;</span>
-    <h3 style="margin-top:0;">🌍 Market Overview</h3>
-    <p class="muted" style="margin-bottom:14px;">Live updates of key market assets. Data auto-refreshes every minute.</p>
-    <table id="market-table" style="width:100%;border-collapse:collapse;font-family:JetBrains Mono,monospace;">
-      <thead>
-        <tr style="color:var(--muted);border-bottom:1px solid color-mix(in oklab,var(--ink) 15%,transparent);">
-          <th align="left">Symbol</th>
-          <th align="right">Price</th>
-          <th align="right">% Change</th>
-          <th align="center">Trend</th>
-        </tr>
-      </thead>
-      <tbody id="market-body"></tbody>
-    </table>
-  </div>
-</div>
-
 <script>
+const FINNHUB_API_KEY = "d3v0vrpr01qil4as7h20d3v0vrpr01qil4as7h2g"; // <-- replace this with your real key
+const SYMBOLS = [
+  { name: "Apple", symbol: "AAPL" },
+  { name: "Microsoft", symbol: "MSFT" },
+  { name: "Bitcoin", symbol: "BINANCE:BTCUSDT" },
+  { name: "S&P500", symbol: "^GSPC" },
+  { name: "GBP/USD", symbol: "OANDA:GBP_USD" }
+];
+
 async function fetchMarketData() {
-  const symbols = ["AAPL", "MSFT", "BTC-USD", "^GSPC", "GBPUSD=X"];
   let tickerHTML = "";
   let tableHTML = "";
 
-  for (let symbol of symbols) {
+  for (let { name, symbol } of SYMBOLS) {
     try {
-      const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=1d`;
+      const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_API_KEY}`;
       const res = await fetch(url);
       const data = await res.json();
-      const meta = data.chart?.result?.[0]?.meta;
-      if (!meta) continue;
 
-      const price = meta.regularMarketPrice?.toFixed(2) || "N/A";
-      const prevClose = meta.chartPreviousClose || meta.previousClose || price;
+      if (!data || !data.c) throw new Error("No data");
+
+      const price = data.c.toFixed(2);
+      const prevClose = data.pc || price;
       const change = price - prevClose;
       const changePct = ((change / prevClose) * 100).toFixed(2);
       const color = change > 0 ? "#22c55e" : change < 0 ? "#ef4444" : "#facc15";
       const trend = change > 0 ? "▲" : change < 0 ? "▼" : "–";
-      const label = symbol.replace("^GSPC", "S&P500");
 
-      // --- Ticker Display ---
+      // --- Ticker ---
       tickerHTML += `
-        <a href="https://finance.yahoo.com/quote/${symbol}" target="_blank" rel="noopener"
+        <a href="https://finance.yahoo.com/quote/${symbol.replace('BINANCE:','').replace('OANDA:','')}" target="_blank" rel="noopener"
            style="color:inherit;text-decoration:none;margin-right:18px;">
-          ${label}: <span style="color:${color}">${price}</span>
+          ${name}: <span style="color:${color}">${price}</span>
           <span class="change" style="opacity:0;color:${color};font-size:0.85rem;">(${changePct}%)</span> │
         </a>`;
 
-      // --- Table Display ---
+      // --- Modal Table ---
       tableHTML += `
         <tr>
-          <td>${label}</td>
-          <td align="right" style="color:${color};">${price}</td>
-          <td align="right" style="color:${color};">${changePct}%</td>
+          <td>${name}</td>
+          <td align="right" style="color:${color}">${price}</td>
+          <td align="right" style="color:${color}">${changePct}%</td>
           <td align="center" style="color:${color};font-weight:bold;">${trend}</td>
         </tr>`;
     } catch {
-      tickerHTML += ` ${symbol}: <span style='color:gray;'>N/A</span> │`;
+      tickerHTML += ` ${name}: <span style='color:gray;'>N/A</span> │`;
     }
   }
 
   document.getElementById("ticker-text").innerHTML = tickerHTML;
   document.getElementById("market-body").innerHTML = tableHTML;
 
-  // Hover interactivity on ticker
   document.querySelectorAll('#market-ticker a').forEach(a => {
     a.addEventListener('mouseenter', () => a.querySelector('.change').style.opacity = 1);
     a.addEventListener('mouseleave', () => a.querySelector('.change').style.opacity = 0);
   });
 }
 
-// Modal controls
 function openMarketModal() {
   document.getElementById("marketModal").style.display = "flex";
 }
@@ -199,24 +180,9 @@ function closeMarketModal() {
   document.getElementById("marketModal").style.display = "none";
 }
 
-// Auto-refresh
 fetchMarketData();
-setInterval(fetchMarketData, 60000);
+setInterval(fetchMarketData, 30000);
 </script>
-
-<style>
-#market-ticker {
-  animation: scroll-left 25s linear infinite;
-}
-#market-ticker:hover {
-  animation-play-state: paused;
-}
-@keyframes scroll-left {
-  0% { text-indent: 100%; }
-  100% { text-indent: -100%; }
-}
-</style>
-
 
 
 
