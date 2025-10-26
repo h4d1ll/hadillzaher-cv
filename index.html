@@ -225,26 +225,37 @@
 </div>
 
 
-    <!-- Personal Investing Playbook modal -->
-    <div id="modalPlaybook" class="modal" onclick="if(event.target===this)closeModal('modalPlaybook')">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal('modalPlaybook')">&times;</span>
-        <h3>💰 Personal Investing Playbook</h3>
-        <p class="muted">
-          ETF-based long-term model built in Excel with <b>dollar-cost averaging</b>, periodic <b>rebalancing</b>, and return projections.
-          Scenario toggles simulate contribution schedules, fees, and drawdowns. Designed clean templates friends/family can reuse.
-        </p>
-        <ul class="muted">
-          <li>⚙️ Logic: DCA cadence, drift thresholds, rebalance bands</li>
-          <li>📈 Views: growth projections, drawdown simulation</li>
-          <li>📘 Output: shareable Excel templates</li>
-        </ul>
-        <div class="charts-container">
-          <img src="assets/playbook_projection.png?v=1" alt="Projection Chart" loading="lazy" onerror="this.style.display='none'">
-          <img src="assets/playbook_rebalance.png?v=1" alt="Rebalancing View" loading="lazy" onerror="this.style.display='none'">
-        </div>
+    <!-- Personal Investing Playbook modal (UPDATED) -->
+<div id="modalPlaybook" class="modal" onclick="if(event.target===this)closeModal('modalPlaybook')">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modalPlaybook')">&times;</span>
+    <h3>💰 Personal Investing Playbook</h3>
+    <p class="muted">
+      10-year Excel model simulating <b>dollar-cost averaging</b> into a diversified ETF portfolio with <b>automatic rebalancing</b> and <b>growth projection</b>.
+      Built in Python using <code>numpy</code>, <code>pandas</code>, and <code>matplotlib</code>.
+    </p>
+    <ul class="muted">
+      <li>⚙️ Logic: DCA £500 monthly, 70/30 equity-bond mix, 5% rebalance threshold</li>
+      <li>📈 Views: projected portfolio value vs. invested total</li>
+      <li>⚖️ Rebalancing chart showing drift & rebalance events</li>
+      <li>📘 Output: downloadable Excel dashboard</li>
+    </ul>
+    <div class="charts-container">
+      <div>
+        <img src="assets/playbook_projection.png?v=2" alt="Projection Chart" loading="lazy" onerror="this.style.display='none'">
+        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 1: 10-Year Portfolio Growth Projection (Monthly DCA)</p>
+      </div>
+      <div>
+        <img src="assets/playbook_rebalance.png?v=2" alt="Rebalancing Chart" loading="lazy" onerror="this.style.display='none'">
+        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 2: Portfolio Rebalancing and Allocation Drift</p>
       </div>
     </div>
+    <div style="margin-top:22px;text-align:center;">
+      <a class="btn" href="Personal_Investing_Playbook.xlsx?v=2" target="_blank" rel="noopener" download>📥 Download Excel Dashboard</a>
+    </div>
+  </div>
+</div>
+
 
     <!-- Banking Crises & Stress Testing modal -->
     <div id="modalStress" class="modal" onclick="if(event.target===this)closeModal('modalStress')">
