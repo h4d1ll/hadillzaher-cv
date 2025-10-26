@@ -1,4 +1,3 @@
-# banking_stress_testing.py
 # 🏦 Banking Crises & Stress Testing (2024)
 # SVB & Credit Suisse contagion, liquidity, and systemic risk simulation
 
@@ -9,25 +8,28 @@ import os
 
 os.makedirs("assets", exist_ok=True)
 
-# ---------- Liquidity Stress Test ----------
+# ---------- Liquidity Stress Simulation ----------
 durations = np.array([1, 2, 5, 10])
-rate_shocks = np.linspace(0, 3, 7)  # 0% to 3%
+rate_shocks = np.linspace(-2, 2, 9)  # -2% to +2%
 
-# Price change ≈ -Duration × Δy
-loss_matrix = np.outer(durations, rate_shocks) * -1
+# Simulated price change ≈ -Duration × Δy × sensitivity factor
+loss_matrix = np.outer(durations, rate_shocks) * -0.8
 loss_df = pd.DataFrame(
     loss_matrix,
     index=[f"{d}Y" for d in durations],
-    columns=[f"{r:.1f}%" for r in rate_shocks],
+    columns=[f"{r:+.1f}%" for r in rate_shocks],
 )
 
-# Save PNG for website modal
-plt.figure(figsize=(7, 5))
-plt.imshow(loss_df, cmap="Reds", aspect="auto")
-plt.title("Liquidity Stress Test — Bond Loss Sensitivity")
-plt.xlabel("Rate Shock (%)")
-plt.ylabel("Duration (Years)")
-plt.colorbar(label="Price Change (%)")
+# Plot — Liquidity Stress Lines
+plt.figure(figsize=(9, 5))
+for i, d in enumerate(durations):
+    plt.plot(rate_shocks, loss_matrix[i], label=f"{d}Y Duration", linewidth=2)
+plt.axhline(0, color="gray", linestyle="--", linewidth=1)
+plt.title("Liquidity Stress Simulation — Bond Value Sensitivity")
+plt.xlabel("Interest Rate Shock (%)")
+plt.ylabel("Portfolio Value Change (%)")
+plt.legend()
+plt.grid(alpha=0.3)
 plt.tight_layout()
 plt.savefig("assets/stress_liquidity.png", bbox_inches="tight", facecolor="white")
 plt.close()
@@ -35,15 +37,21 @@ plt.close()
 # ---------- Contagion Simulation ----------
 banks = ["SVB", "Credit Suisse", "Deutsche", "HSBC", "JPM", "BNP", "UBS"]
 np.random.seed(42)
+
+# Create denser interbank exposures for realism
 exposure = pd.DataFrame(
-    np.random.uniform(0, 1, (len(banks), len(banks))), index=banks, columns=banks
+    np.random.uniform(0.3, 1.0, (len(banks), len(banks))), index=banks, columns=banks
 )
 np.fill_diagonal(exposure.values, 0)
 
-loss_given_default = 0.5
-threshold = 8.0
+# Parameters — tune to ensure propagation
+loss_given_default = 0.7     # how much loss if a counterparty defaults
+threshold = 0.3              # threshold of losses before a bank fails
 
 def contagion_round(exposure_df, defaults, lgd, threshold):
+    """Compute contagion round given defaults."""
+    if not defaults:
+        return pd.Series(0, index=exposure_df.index), set()
     losses = exposure_df[list(defaults)].sum(axis=1) * lgd
     new_defaults = set(exposure_df.index[losses > threshold]) - defaults
     return losses, new_defaults
@@ -51,10 +59,18 @@ def contagion_round(exposure_df, defaults, lgd, threshold):
 defaults = {"SVB"}
 all_defaults = set(defaults)
 rounds = []
+defaults_count = []
 
+# Simulate up to 6 contagion rounds
 for i in range(6):
     losses, new = contagion_round(exposure, defaults, loss_given_default, threshold)
-    rounds.append({"Round": i + 1, "Defaults": list(defaults), "New Defaults": list(new)})
+    rounds.append({
+        "Round": i + 1,
+        "Defaults": list(defaults),
+        "New Defaults": list(new),
+        "Triggered Banks": len(defaults),
+    })
+    defaults_count.append(len(defaults))
     if not new:
         break
     defaults |= new
@@ -62,12 +78,14 @@ for i in range(6):
 
 contagion_summary = pd.DataFrame(rounds)
 
-# Save PNG for website modal
-plt.figure(figsize=(7, 5))
-plt.bar(contagion_summary["Round"], contagion_summary["Defaults"].apply(len), color="indianred")
-plt.title("Systemic Contagion Simulation — Default Spread Over Rounds")
+# Plot — Contagion Propagation Line (visible curve)
+plt.figure(figsize=(9, 5))
+plt.plot(range(1, len(defaults_count) + 1), defaults_count,
+         marker="o", linewidth=2.5, color="#ef4444")
+plt.title("Systemic Contagion — Default Propagation")
 plt.xlabel("Simulation Round")
 plt.ylabel("Cumulative Defaults")
+plt.grid(alpha=0.3)
 plt.tight_layout()
 plt.savefig("assets/stress_contagion.png", bbox_inches="tight", facecolor="white")
 plt.close()
@@ -81,7 +99,7 @@ with pd.ExcelWriter(file, engine="xlsxwriter") as writer:
 
     wb = writer.book
 
-    # Liquidity Chart (Line)
+    # Liquidity Chart
     ws_liq = writer.sheets["Liquidity Stress"]
     chart1 = wb.add_chart({"type": "line"})
     for i, col in enumerate(loss_df.columns):
@@ -96,13 +114,13 @@ with pd.ExcelWriter(file, engine="xlsxwriter") as writer:
     chart1.set_legend({"position": "bottom"})
     ws_liq.insert_chart("H2", chart1)
 
-    # Contagion Chart (Column)
+    # Contagion Chart
     ws_con = writer.sheets["Contagion Simulation"]
-    chart2 = wb.add_chart({"type": "column"})
+    chart2 = wb.add_chart({"type": "line"})
     chart2.add_series({
         "categories": ["Contagion Simulation", 1, 0, len(contagion_summary), 0],
-        "values":     ["Contagion Simulation", 1, 1, len(contagion_summary), 1],
-        "name":       "Defaults per Round",
+        "values":     ["Contagion Simulation", 1, 3, len(contagion_summary), 3],
+        "name":       "Cumulative Defaults",
     })
     chart2.set_title({"name": "Systemic Contagion — Defaults Over Time"})
     chart2.set_x_axis({"name": "Simulation Round"})
