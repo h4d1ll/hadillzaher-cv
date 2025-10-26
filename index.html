@@ -171,46 +171,64 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
       </div>
     </section>
 
-    <!-- Projects -->
-<div class="section-title" id="projects"><h2>Projects &amp; Research</h2></div>
+    <!-- 🧠 Projects & Research -->
+<div class="section-title" id="projects">
+  <h2>Projects &amp; Research</h2>
+</div>
+
 <section class="grid grid-2">
-  <!-- 1) Fintech Valuation Tracker -->
-  <article class="card">
+  <!-- 1️⃣ Fintech Valuation Tracker -->
+  <article class="card" role="article">
     <h3>📈 Fintech Valuation Tracker</h3>
-    <p class="muted">Dashboard using Python & Excel to track fintech stock performance and visualize P/E trends with Matplotlib.</p>
-    <button class="btn" onclick="openModal('modalValuation')">View Analysis</button>
+    <p class="muted">
+      Dashboard using Python & Excel to track fintech stock performance and visualize P/E trends with Matplotlib.
+    </p>
+    <button class="btn" onclick="openModal('modalValuation')" aria-haspopup="dialog" aria-controls="modalValuation">
+      View Analysis
+    </button>
   </article>
 
-  <!-- 2) Personal Investing Playbook -->
-  <article class="card">
+  <!-- 2️⃣ Personal Investing Playbook -->
+  <article class="card" role="article">
     <h3>💰 Personal Investing Playbook</h3>
-    <p class="muted">Long-term ETF model with DCA and rebalancing logic. Templates to forecast returns and improve budgeting.</p>
-    <button class="btn" onclick="openModal('modalPlaybook')">View Analysis</button>
+    <p class="muted">
+      Long-term ETF model with DCA and rebalancing logic. Templates to forecast returns and improve budgeting.
+    </p>
+    <button class="btn" onclick="openModal('modalPlaybook')" aria-haspopup="dialog" aria-controls="modalPlaybook">
+      View Analysis
+    </button>
   </article>
 
-  <!-- 3) Banking Crises & Stress Testing -->
-  <article class="card">
+  <!-- 3️⃣ Banking Crises & Stress Testing -->
+  <article class="card" role="article">
     <h3>🏦 Banking Crises & Stress Testing (2024)</h3>
-    <p class="muted">SVB & Credit Suisse analysis: contagion, liquidity risk, and central bank interventions.</p>
-    <button class="btn" onclick="openModal('modalStress')">View Analysis</button>
+    <p class="muted">
+      SVB & Credit Suisse analysis: contagion, liquidity risk, and central bank interventions.
+    </p>
+    <button class="btn" onclick="openModal('modalStress')" aria-haspopup="dialog" aria-controls="modalStress">
+      View Analysis
+    </button>
   </article>
 
-  <!-- 4) Fintech vs Banks -->
-  <article class="card">
+  <!-- 4️⃣ Fintech vs Banks -->
+  <article class="card" role="article">
     <h3>📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
-    <p class="muted">Python-based 3-year comparison (yfinance, pandas): Sharpe, volatility, drawdowns, and Excel dashboard.</p>
-    <button class="btn" onclick="openModal('modal1')">View Analysis</button>
+    <p class="muted">
+      Python-based 3-year comparison (yfinance, pandas): Sharpe, volatility, drawdowns, and Excel dashboard.
+    </p>
+    <button class="btn" onclick="openModal('modal1')" aria-haspopup="dialog" aria-controls="modal1">
+      View Analysis
+    </button>
   </article>
 </section>
 
-<!-- MODALS -->
+<!-- === MODALS === -->
 
-<!-- Fintech vs Banks -->
-<div id="modal1" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal1Title"
-     onclick="if(event.target===this)closeModal('modal1')">
+<!-- 📊 Fintech vs Banks Modal -->
+<div id="modal1" class="modal" role="dialog" aria-labelledby="modal1-title" aria-modal="true" onclick="if(event.target===this)closeModal('modal1')">
   <div class="modal-content">
-    <span class="close" onclick="closeModal('modal1')" aria-label="Close dialog">&times;</span>
-    <h3 id="modal1Title">📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
+    <button class="close" onclick="closeModal('modal1')" aria-label="Close dialog">&times;</button>
+    <h3 id="modal1-title">📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
     <p class="muted">
       Built with <b>pandas, numpy, matplotlib, yfinance</b>. Metrics: <b>annualized return, volatility, Sharpe, drawdown, correlations</b>.
       Outputs: <b>Fintech_vs_Banks_3Y_Report.xlsx</b>.
@@ -223,16 +241,16 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
     </ul>
     <div class="charts-container">
       <div>
-        <img src="assets/fintech_banks_cumulative.png?v=8" alt="Cumulative Returns Chart" loading="lazy" onerror="this.style.display='none'">
-        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 1: Cumulative Returns (3-Year)</p>
+        <img src="assets/fintech_banks_cumulative.png?v=8" alt="Cumulative Returns Chart" loading="lazy">
+        <p class="muted">Figure 1: Cumulative Returns (3-Year)</p>
       </div>
       <div>
-        <img src="assets/rolling_sharpe.png?v=8" alt="Rolling Sharpe Ratios Chart" loading="lazy" onerror="this.style.display='none'">
-        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 2: Rolling 6-Month Sharpe</p>
+        <img src="assets/rolling_sharpe.png?v=8" alt="Rolling Sharpe Ratios Chart" loading="lazy">
+        <p class="muted">Figure 2: Rolling 6-Month Sharpe</p>
       </div>
       <div>
-        <img src="assets/correlation_heatmap.png?v=8" alt="Correlation Heatmap Chart" loading="lazy" onerror="this.style.display='none'">
-        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 3: Correlation Heatmap</p>
+        <img src="assets/correlation_heatmap.png?v=8" alt="Correlation Heatmap" loading="lazy">
+        <p class="muted">Figure 3: Correlation Heatmap</p>
       </div>
     </div>
     <div style="margin-top:22px;text-align:center;">
@@ -241,12 +259,11 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
   </div>
 </div>
 
-<!-- Fintech Valuation Tracker -->
-<div id="modalValuation" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalValuationTitle"
-     onclick="if(event.target===this)closeModal('modalValuation')">
+<!-- 📈 Fintech Valuation Tracker Modal -->
+<div id="modalValuation" class="modal" role="dialog" aria-labelledby="modalValuation-title" aria-modal="true" onclick="if(event.target===this)closeModal('modalValuation')">
   <div class="modal-content">
-    <span class="close" onclick="closeModal('modalValuation')" aria-label="Close dialog">&times;</span>
-    <h3 id="modalValuationTitle">📈 Fintech Valuation Tracker</h3>
+    <button class="close" onclick="closeModal('modalValuation')" aria-label="Close dialog">&times;</button>
+    <h3 id="modalValuation-title">📈 Fintech Valuation Tracker</h3>
     <p class="muted">
       Python + Excel workflow tracking selected fintechs’ P/E and price performance. Prices via <code>yfinance</code>.
       P/E trendlines use trailing EPS where available (via quarterly earnings) and visualize valuation shifts with Matplotlib.
@@ -257,14 +274,10 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
       <li>📘 Output: Excel workbook with charts & filters</li>
     </ul>
     <div class="charts-container">
-      <div>
-        <img src="assets/fintech_prices_normalized.png?v=2" alt="Fintech Prices (Indexed to 100)" loading="lazy" onerror="this.style.display='none'">
-        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 1: Fintech Price Performance (Indexed to 100)</p>
-      </div>
-      <div>
-        <img src="assets/fintech_pe_quarterly.png?v=2" alt="Fintech P/E Trendlines (Quarterly)" loading="lazy" onerror="this.style.display='none'">
-        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 2: Fintech P/E Trendlines — Quarterly (Price / TTM EPS)</p>
-      </div>
+      <img src="assets/fintech_prices_normalized.png?v=2" alt="Fintech Prices Indexed to 100" loading="lazy">
+      <p class="muted">Figure 1: Fintech Price Performance (Indexed to 100)</p>
+      <img src="assets/fintech_pe_quarterly.png?v=2" alt="Fintech P/E Trendlines" loading="lazy">
+      <p class="muted">Figure 2: Fintech P/E Trendlines — Quarterly (Price / TTM EPS)</p>
     </div>
     <div style="margin-top:22px;text-align:center;">
       <a class="btn" href="Fintech_PE_Dashboard.xlsx?v=2" target="_blank" rel="noopener" download>📥 Download Excel Dashboard</a>
@@ -272,12 +285,11 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
   </div>
 </div>
 
-<!-- Personal Investing Playbook -->
-<div id="modalPlaybook" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalPlaybookTitle"
-     onclick="if(event.target===this)closeModal('modalPlaybook')">
+<!-- 💰 Personal Investing Playbook Modal -->
+<div id="modalPlaybook" class="modal" role="dialog" aria-labelledby="modalPlaybook-title" aria-modal="true" onclick="if(event.target===this)closeModal('modalPlaybook')">
   <div class="modal-content">
-    <span class="close" onclick="closeModal('modalPlaybook')" aria-label="Close dialog">&times;</span>
-    <h3 id="modalPlaybookTitle">💰 Personal Investing Playbook</h3>
+    <button class="close" onclick="closeModal('modalPlaybook')" aria-label="Close dialog">&times;</button>
+    <h3 id="modalPlaybook-title">💰 Personal Investing Playbook</h3>
     <p class="muted">
       Python + Excel model simulating <b>dollar-cost averaging (DCA)</b> into a 70/30 equity-bond portfolio over 10 years.
       Tracks portfolio growth, rebalancing triggers, and return metrics using <code>numpy</code>, <code>pandas</code>, and <code>matplotlib</code>.
@@ -289,8 +301,8 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
       <li>📘 Output: downloadable Excel dashboard</li>
     </ul>
     <div class="charts-container">
-      <img src="assets/playbook_projection.png?v=2" alt="Portfolio Growth Projection" loading="lazy" onerror="this.style.display='none'">
-      <img src="assets/playbook_rebalance.png?v=2" alt="Rebalancing and Allocation Drift" loading="lazy" onerror="this.style.display='none'">
+      <img src="assets/playbook_projection.png?v=2" alt="Portfolio Growth Projection" loading="lazy">
+      <img src="assets/playbook_rebalance.png?v=2" alt="Rebalancing and Allocation Drift" loading="lazy">
     </div>
     <div style="margin-top:22px;text-align:center;">
       <a class="btn" href="Personal_Investing_Playbook.xlsx?v=2" target="_blank" rel="noopener" download>📥 Download Excel Dashboard</a>
@@ -298,12 +310,11 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
   </div>
 </div>
 
-<!-- Banking Crises & Stress Testing -->
-<div id="modalStress" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalStressTitle"
-     onclick="if(event.target===this)closeModal('modalStress')">
+<!-- 🏦 Banking Crises & Stress Testing Modal -->
+<div id="modalStress" class="modal" role="dialog" aria-labelledby="modalStress-title" aria-modal="true" onclick="if(event.target===this)closeModal('modalStress')">
   <div class="modal-content">
-    <span class="close" onclick="closeModal('modalStress')" aria-label="Close dialog">&times;</span>
-    <h3 id="modalStressTitle">🏦 Banking Crises & Stress Testing (2024)</h3>
+    <button class="close" onclick="closeModal('modalStress')" aria-label="Close dialog">&times;</button>
+    <h3 id="modalStress-title">🏦 Banking Crises & Stress Testing (2024)</h3>
     <p class="muted">
       Simulated case study of <b>SVB</b> and <b>Credit Suisse</b> collapses using Python — exploring <b>liquidity stress, contagion risk,</b> and <b>systemic propagation</b>.
       This model quantifies how rising rates erode bond portfolios and how defaults can spread through an interconnected banking system.
@@ -314,20 +325,17 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
       <li>📘 <b>Output:</b> Excel dashboard with stress tables and embedded charts</li>
     </ul>
     <div class="charts-container">
-      <div>
-        <img src="assets/stress_liquidity.png?v=3" alt="Liquidity Stress Simulation" loading="lazy" onerror="this.style.display='none'">
-        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 1: Liquidity Stress — Bond Value Sensitivity</p>
-      </div>
-      <div>
-        <img src="assets/stress_contagion.png?v=3" alt="Systemic Contagion Propagation" loading="lazy" onerror="this.style.display='none'">
-        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 2: Systemic Contagion — Default Propagation</p>
-      </div>
+      <img src="assets/stress_liquidity.png?v=3" alt="Liquidity Stress Simulation" loading="lazy">
+      <p class="muted">Figure 1: Liquidity Stress — Bond Value Sensitivity</p>
+      <img src="assets/stress_contagion.png?v=3" alt="Systemic Contagion Propagation" loading="lazy">
+      <p class="muted">Figure 2: Systemic Contagion — Default Propagation</p>
     </div>
     <div style="margin-top:22px;text-align:center;">
       <a class="btn" href="Banking_Stress_Testing_2024.xlsx?v=3" target="_blank" rel="noopener" download>📥 Download Excel Dashboard</a>
     </div>
   </div>
 </div>
+
 
 
 
