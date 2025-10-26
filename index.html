@@ -145,10 +145,11 @@
 
       <!-- 3) Banking Crises & Stress Testing -->
       <article class="card">
-        <h3>🏦 Banking Crises & Stress Testing (2024)</h3>
-        <p class="muted">SVB & Credit Suisse analysis: contagion, liquidity risk, and central bank interventions.</p>
-        <button class="btn" onclick="openModal('modalStress')">View Details</button>
-      </article>
+  <h3>🏦 Banking Crises & Stress Testing (2024)</h3>
+  <p class="muted">SVB & Credit Suisse analysis: contagion, liquidity risk, and central bank interventions.</p>
+  <button class="btn" onclick="openModal('modalStress')">View Details</button>
+</article>
+
 
       <!-- 4) Fintech vs Banks (kept) -->
       <article class="card">
@@ -253,25 +254,38 @@
 
 
     <!-- Banking Crises & Stress Testing modal -->
-    <div id="modalStress" class="modal" onclick="if(event.target===this)closeModal('modalStress')">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal('modalStress')">&times;</span>
-        <h3>🏦 Banking Crises & Stress Testing (2024)</h3>
-        <p class="muted">
-          Case study of SVB & Credit Suisse: funding fragility, deposit flight dynamics, and market contagion.
-          Summarized lessons for liquidity coverage, stress scenarios, and policy backstops (BTFP, swap lines).
-        </p>
-        <ul class="muted">
-          <li>🔎 Themes: duration mismatch, unrealized AFS/HTM losses, confidence spirals</li>
-          <li>🧪 Stress set: rate shocks, deposit outflows, bond markdowns</li>
-          <li>📗 Deliverable: concise memo + stress tables</li>
-        </ul>
-        <div class="charts-container">
-          <img src="assets/stress_liquidity.png?v=1" alt="Liquidity Stress Illustration" loading="lazy" onerror="this.style.display='none'">
-          <img src="assets/stress_contagion.png?v=1" alt="Contagion Paths" loading="lazy" onerror="this.style.display='none'">
-        </div>
+<div id="modalStress" class="modal" onclick="if(event.target===this)closeModal('modalStress')">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modalStress')">&times;</span>
+    <h3>🏦 Banking Crises & Stress Testing (2024)</h3>
+    <p class="muted">
+      Analysis of the <b>Silicon Valley Bank (SVB)</b> and <b>Credit Suisse</b> collapses, modeling contagion risk, 
+      liquidity stress, and systemic exposure using <b>Python, NumPy, Pandas, Matplotlib</b>, and <b>Excel</b>.
+    </p>
+    <ul class="muted">
+      <li>💧 <b>Liquidity Stress Test:</b> models bond losses as interest rates rise</li>
+      <li>⚡ <b>Contagion Simulation:</b> shows interbank defaults spreading across the network</li>
+      <li>📊 <b>Excel Dashboard:</b> includes dynamic charts and key metrics per simulation</li>
+    </ul>
+    <div class="charts-container">
+      <div>
+        <img src="assets/stress_liquidity.png?v=1" alt="Liquidity Stress Heatmap" loading="lazy" onerror="this.style.display='none'">
+        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 1: Liquidity Stress — Bond Sensitivity to Rate Shocks</p>
+      </div>
+      <div>
+        <img src="assets/stress_contagion.png?v=1" alt="Contagion Simulation Chart" loading="lazy" onerror="this.style.display='none'">
+        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 2: Systemic Contagion — Defaults Over Simulation Rounds</p>
       </div>
     </div>
+    <div style="margin-top:22px;text-align:center;">
+      <a class="btn" href="Banking_Stress_Testing_2024.xlsx?v=1" target="_blank" rel="noopener" download>
+        📥 Download Excel Dashboard
+      </a>
+    </div>
+  </div>
+</div>
+
+
 
     <!-- Contact -->
     <div class="section-title" id="contact"><h2>Contact</h2></div>
