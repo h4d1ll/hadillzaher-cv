@@ -358,10 +358,11 @@ async function sendQuestion() {
 
   try {
     const res = await fetch("https://hadillzaher-cv.onrender.com/ask", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: question })
-    });
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ message: question })
+});
+
     const data = await res.json();
     answer = data.answer || "Hmm, I couldn't find an exact answer — but let's think about it.";
   } catch (err) {
