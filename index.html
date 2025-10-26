@@ -113,14 +113,38 @@
     </div>
   </header>
 
-  <!-- 📈 Live Market Ticker + Popup Dashboard -->
+ <!-- 📈 Live Market Ticker + Popup Dashboard -->
+<!-- Visible scrolling ticker -->
+<div id="market-ticker" style="background:#0a0f1a;color:#22c55e;font-family:monospace;white-space:nowrap;overflow:hidden;padding:8px 12px;">
+  <span id="ticker-text">Loading market data...</span>
+</div>
+
+<!-- 💹 Popup Market Overview Modal -->
+<div id="marketModal" class="modal" style="display:none;position:fixed;z-index:100;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,.7);align-items:center;justify-content:center;">
+  <div class="modal-content" style="background:#111827;padding:20px;border-radius:12px;max-width:600px;width:90%;max-height:80vh;overflow-y:auto;color:#e5e7eb;">
+    <span onclick="closeMarketModal()" style="float:right;cursor:pointer;font-size:1.4rem;color:#9ca3af;">✕</span>
+    <h3 style="margin-bottom:12px;">📊 Live Market Overview</h3>
+    <table style="width:100%;border-collapse:collapse;text-align:left;">
+      <thead>
+        <tr style="color:#9ca3af;border-bottom:1px solid #333;">
+          <th>Asset</th><th style="text-align:right;">Price</th><th style="text-align:right;">Change</th><th style="text-align:center;">Trend</th>
+        </tr>
+      </thead>
+      <tbody id="market-body">
+        <tr><td colspan="4" style="text-align:center;color:#9ca3af;">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 🪙 Market Ticker Script -->
 <script>
-const FINNHUB_API_KEY = "d3v0vrpr01qil4as7h20d3v0vrpr01qil4as7h2g"; // <-- replace this with your real key
+const FINNHUB_API_KEY = "d3v0vrpr01qil4as7h20d3v0vrpr01qil4as7h2g"; // your real key stays in quotes
 const SYMBOLS = [
   { name: "Apple", symbol: "AAPL" },
   { name: "Microsoft", symbol: "MSFT" },
   { name: "Bitcoin", symbol: "BINANCE:BTCUSDT" },
-  { name: "S&P500", symbol: "^GSPC" },
+  { name: "S&P500", symbol: "SPY" },
   { name: "GBP/USD", symbol: "OANDA:GBP_USD" }
 ];
 
@@ -143,7 +167,6 @@ async function fetchMarketData() {
       const color = change > 0 ? "#22c55e" : change < 0 ? "#ef4444" : "#facc15";
       const trend = change > 0 ? "▲" : change < 0 ? "▼" : "–";
 
-      // --- Ticker ---
       tickerHTML += `
         <a href="https://finance.yahoo.com/quote/${symbol.replace('BINANCE:','').replace('OANDA:','')}" target="_blank" rel="noopener"
            style="color:inherit;text-decoration:none;margin-right:18px;">
@@ -151,7 +174,6 @@ async function fetchMarketData() {
           <span class="change" style="opacity:0;color:${color};font-size:0.85rem;">(${changePct}%)</span> │
         </a>`;
 
-      // --- Modal Table ---
       tableHTML += `
         <tr>
           <td>${name}</td>
@@ -183,6 +205,21 @@ function closeMarketModal() {
 fetchMarketData();
 setInterval(fetchMarketData, 30000);
 </script>
+
+<style>
+/* Smooth scrolling ticker animation */
+#market-ticker {
+  animation: scroll-left 25s linear infinite;
+}
+@keyframes scroll-left {
+  0% { text-indent: 100%; }
+  100% { text-indent: -100%; }
+}
+</style>
+
+<!-- Button to open modal -->
+<button class="btn" onclick="openMarketModal()">💹 Market Overview</button>
+
 
 
 
