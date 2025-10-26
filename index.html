@@ -57,6 +57,17 @@
   .btn-outline{background:transparent}
   .btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
 
+    .badge {
+  display: inline-block;
+  background: color-mix(in oklab, var(--brand) 25%, transparent);
+  border: 1px solid color-mix(in oklab, var(--brand) 45%, transparent);
+  color: var(--ink);
+  font-size: 0.85rem;
+  border-radius: 10px;
+  padding: 4px 10px;
+  margin: 4px;
+}
+
   main{padding-top:30px}
   section{scroll-margin-top:80px;}
   .grid{display:grid;gap:18px}
@@ -126,7 +137,12 @@
         <div class="avatar">HZ</div>
         <div>
           <div class="name">Hadill Zaher</div>
-          <div class="role">Accounting &amp; Finance Graduate — London</div>
+    <div class="role">
+      Accounting &amp; Finance Graduate — London<br>
+      <span style="color:var(--brand-2);font-weight:500;">
+        Fintech | Data Analytics | Financial Modelling
+      </span>
+    </div>
         </div>
       </div>
       <div class="actions">
@@ -170,6 +186,135 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
         </div>
       </div>
     </section>
+
+    <!-- 🏆 Achievements & Highlights -->
+<div class="section-title" id="achievements">
+  <h2>🏆 Achievements & Highlights</h2>
+</div>
+
+<section class="grid grid-3">
+  <article class="card">
+    <h3>📊 Fintech Data Analytics</h3>
+    <p class="muted">
+      Built Python + Excel dashboards tracking fintech valuations and volatility across 5 global firms, improving analysis efficiency by <b>40%</b>.
+    </p>
+  </article>
+
+  <article class="card">
+    <h3>🎓 Bayes Business School (2025)</h3>
+    <p class="muted">
+      Graduated with a <b>2:1 in Accounting & Finance</b> from Bayes, focusing on fintech, financial regulation, and quantitative modelling.
+    </p>
+  </article>
+
+  <article class="card">
+    <h3>💡 Investment Research & Strategy</h3>
+    <p class="muted">
+      Conducted portfolio simulations using Python (Pandas, NumPy), testing rebalancing and stress scenarios — applied insights to personal ETF portfolio.
+    </p>
+  </article>
+
+  <article class="card">
+    <h3>🏦 Banking System Analysis</h3>
+    <p class="muted">
+      Modelled 2023 <b>Credit Suisse</b> and <b>SVB</b> collapses to simulate contagion risk and liquidity stress; visualised outcomes with Matplotlib.
+    </p>
+  </article>
+
+  <article class="card">
+    <h3>📈 Trading & Market Insight</h3>
+    <p class="muted">
+      Active member of <b>Trading Society</b> — achieved <b>Top 5%</b> ranking in simulated portfolio competition with a Sharpe ratio above 1.5.
+    </p>
+  </article>
+
+  <article class="card">
+    <h3>🤝 Leadership & Mentorship</h3>
+    <p class="muted">
+      Tutored A-Level students in Economics and Maths, simplifying quantitative finance concepts and improving average grades by 20%.
+    </p>
+  </article>
+</section>
+
+
+  <!-- ⚙️ Skills & Tools -->
+<div class="section-title" id="skills">
+  <h2>⚙️ Skills & Tools</h2>
+</div>
+
+<section class="grid grid-3">
+  <!-- 🧮 Data & Analytics -->
+  <article class="card">
+    <h3>📊 Data Analysis & Modelling</h3>
+    <p class="muted">
+      <b>Python (Pandas, NumPy, Matplotlib)</b> — data cleaning, performance analytics, and visualization.  
+      <br>Proficient in <b>Excel & Power Query</b> for dashboard automation and scenario modelling.
+    </p>
+  </article>
+
+  <!-- 💻 Financial Tools -->
+  <article class="card">
+    <h3>💻 Financial & Valuation Tools</h3>
+    <p class="muted">
+      Experience with <b>DCF valuation models</b>, <b>banking stress tests</b>, and <b>portfolio simulations</b>.  
+      Skilled in <b>Bloomberg-style analytics</b> using Python data APIs (<code>yfinance</code>, <code>FRED</code>).
+    </p>
+  </article>
+
+  <!-- 🏦 Fintech & Markets -->
+  <article class="card">
+    <h3>🏦 Fintech & Markets</h3>
+    <p class="muted">
+      Familiar with <b>trading systems</b>, <b>crypto/ETF analysis</b>, and <b>financial regulation</b>.  
+      Focused on fintech innovation, market microstructure, and quantitative insights.
+    </p>
+  </article>
+
+  <!-- 📈 Software & Databases -->
+  <article class="card">
+    <h3>🧠 Software & Databases</h3>
+    <p class="muted">
+      <b>SQL</b> for structured queries, <b>Power BI</b> for reporting, <b>GitHub</b> for version control,  
+      and <b>FastAPI</b> for lightweight web-based analytics applications.
+    </p>
+  </article>
+
+  <!-- 🤖 Programming & Automation -->
+  <article class="card">
+    <h3>🤖 Programming & Automation</h3>
+    <p class="muted">
+      Automating financial reports, Excel data pipelines, and REST API integrations using <b>Python</b> scripts.  
+      Enthusiastic about applying <b>AI/ML</b> for investment insights.
+    </p>
+  </article>
+
+  <!-- 🧰 Soft Skills -->
+  <article class="card">
+    <h3>🧰 Core Strengths</h3>
+    <p class="muted">
+      Analytical mindset, clear communication, attention to detail, and collaborative teamwork.  
+      Comfortable translating complex financial models into actionable insights.
+    </p>
+  </article>
+</section>
+
+<!-- Skill Badges -->
+<div style="text-align:center;margin-top:18px;">
+  <span class="badge">🐍 Python</span>
+  <span class="badge">📈 Excel</span>
+  <span class="badge">🧮 Pandas</span>
+  <span class="badge">💻 SQL</span>
+  <span class="badge">📊 Power BI</span>
+  <span class="badge">⚙️ FastAPI</span>
+  <span class="badge">💡 Financial Modelling</span>
+  <span class="badge">🏦 Fintech Analytics</span>
+</div>
+
+
+<p class="muted" style="text-align:center;margin-top:10px;">
+  💼 Explore my finance & fintech projects below — combining data, analytics, and strategy.
+</p>
+
 
     <!-- 🧠 Projects & Research -->
 <div class="section-title" id="projects">
@@ -349,8 +494,6 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
     </div>
   </div>
 </div>
-
-
 
 
     <!-- 💬 Ask Me Anything — Contextual Chat -->
