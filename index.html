@@ -271,37 +271,38 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
 
 
 
-    <!-- Banking Crises & Stress Testing modal -->
+    <!-- Banking Crises & Stress Testing modal (UPDATED) -->
 <div id="modalStress" class="modal" onclick="if(event.target===this)closeModal('modalStress')">
   <div class="modal-content">
     <span class="close" onclick="closeModal('modalStress')">&times;</span>
     <h3>🏦 Banking Crises & Stress Testing (2024)</h3>
     <p class="muted">
-      Analysis of the <b>Silicon Valley Bank (SVB)</b> and <b>Credit Suisse</b> collapses, modeling contagion risk, 
-      liquidity stress, and systemic exposure using <b>Python, NumPy, Pandas, Matplotlib</b>, and <b>Excel</b>.
+      Simulated case study of <b>SVB</b> and <b>Credit Suisse</b> collapses using Python — exploring <b>liquidity stress, contagion risk,</b> and <b>systemic propagation</b>.
+      This model quantifies how rising rates erode bond portfolios and how defaults can spread through an interconnected banking system.
     </p>
     <ul class="muted">
-      <li>💧 <b>Liquidity Stress Test:</b> models bond losses as interest rates rise</li>
-      <li>⚡ <b>Contagion Simulation:</b> shows interbank defaults spreading across the network</li>
-      <li>📊 <b>Excel Dashboard:</b> includes dynamic charts and key metrics per simulation</li>
+      <li>📉 <b>Liquidity Stress:</b> Duration-based sensitivity of bond portfolios to rate shocks</li>
+      <li>🏦 <b>Contagion Network:</b> Simulated interbank exposures showing systemic propagation</li>
+      <li>📘 <b>Output:</b> Excel dashboard with stress tables and embedded charts</li>
     </ul>
+
     <div class="charts-container">
       <div>
-        <img src="assets/stress_liquidity.png?v=1" alt="Liquidity Stress Heatmap" loading="lazy" onerror="this.style.display='none'">
-        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 1: Liquidity Stress — Bond Sensitivity to Rate Shocks</p>
+        <img src="assets/stress_liquidity.png?v=3" alt="Liquidity Stress Simulation" loading="lazy" onerror="this.style.display='none'">
+        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 1: Liquidity Stress — Bond Value Sensitivity</p>
       </div>
       <div>
-        <img src="assets/stress_contagion.png?v=1" alt="Contagion Simulation Chart" loading="lazy" onerror="this.style.display='none'">
-        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 2: Systemic Contagion — Defaults Over Simulation Rounds</p>
+        <img src="assets/stress_contagion.png?v=3" alt="Systemic Contagion Propagation" loading="lazy" onerror="this.style.display='none'">
+        <p class="muted" style="font-size:.9rem;margin-top:4px;">Figure 2: Systemic Contagion — Default Propagation</p>
       </div>
     </div>
+
     <div style="margin-top:22px;text-align:center;">
-      <a class="btn" href="Banking_Stress_Testing_2024.xlsx?v=1" target="_blank" rel="noopener" download>
-        📥 Download Excel Dashboard
-      </a>
+      <a class="btn" href="Banking_Stress_Testing_2024.xlsx?v=3" target="_blank" rel="noopener" download>📥 Download Excel Dashboard</a>
     </div>
   </div>
 </div>
+
 
 
 
