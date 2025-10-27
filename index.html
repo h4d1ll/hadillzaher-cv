@@ -6,12 +6,14 @@
   <title>Hadill Zaher — CV</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <meta name="description" content="CV website for Hadill Zaher — Accounting & Finance graduate passionate about fintech, investing, and quantitative financial analysis using Python and Excel." />
+  <meta name="keywords" content="Hadill Zaher, finance graduate, asset management, fintech analytics, investment research, accounting and finance, Python, Excel, Bayes Business School, London">
   <meta property="og:title" content="Hadill Zaher — CV" />
   <meta property="og:description" content="Accounting & Finance graduate based in London. Passionate about fintech, data-driven investing, and financial strategy." />
   <meta property="og:image" content="https://h4d1ll.github.io/hadillzaher-cv/preview.png" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#111827" />
+  <link rel="canonical" href="https://h4d1ll.github.io/hadillzaher-cv/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -57,16 +59,11 @@
   .btn-outline{background:transparent}
   .btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
 
-    .badge {
-  display: inline-block;
-  background: color-mix(in oklab, var(--brand) 25%, transparent);
-  border: 1px solid color-mix(in oklab, var(--brand) 45%, transparent);
-  color: var(--ink);
-  font-size: 0.85rem;
-  border-radius: 10px;
-  padding: 4px 10px;
-  margin: 4px;
-}
+  .badge {
+    display:inline-block;background:color-mix(in oklab,var(--brand) 25%,transparent);
+    border:1px solid color-mix(in oklab,var(--brand) 45%,transparent);color:var(--ink);
+    font-size:0.85rem;border-radius:10px;padding:4px 10px;margin:4px;
+  }
 
   main{padding-top:30px}
   section{scroll-margin-top:80px;}
@@ -98,7 +95,7 @@
 
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 
-  /* Market ticker */
+  /* Market ticker (reserved) */
   #market-ticker {
     font-family:JetBrains Mono,monospace;
     font-size:0.9rem;
@@ -118,52 +115,91 @@
   }
 
   footer{margin:40px 0 20px;color:var(--muted);text-align:center;font-size:.9rem}
+
+  /* Improved modal responsiveness */
+  @media(max-width:768px){
+    .modal-content{width:95vw;max-width:95vw;max-height:85vh}
+  }
 </style>
 
-
   <script>
+    // Theme
     const applyTheme=()=>{const t=localStorage.getItem('theme')||'dark'; t==='light'?document.documentElement.setAttribute('data-theme','light'):document.documentElement.removeAttribute('data-theme');};
     applyTheme();
     function toggleTheme(){const isLight=document.documentElement.getAttribute('data-theme')==='light';localStorage.setItem('theme',isLight?'dark':'light');applyTheme();}
-    function openModal(id){document.getElementById(id).style.display='flex';}
-    function closeModal(id){document.getElementById(id).style.display='none';}
+
+    // Modals + accessibility
+    let lastFocusedEl = null;
+    function openModal(id){
+      const modal = document.getElementById(id);
+      if(!modal) return;
+      lastFocusedEl = document.activeElement;
+      modal.style.display='flex';
+      const heading = modal.querySelector('h3');
+      if(heading){ heading.setAttribute('tabindex','-1'); heading.focus(); }
+      // close on Esc
+      function escHandler(e){ if(e.key==='Escape'){ closeModal(id); document.removeEventListener('keydown',escHandler);} }
+      document.addEventListener('keydown',escHandler);
+    }
+    function closeModal(id){
+      const modal = document.getElementById(id);
+      if(!modal) return;
+      modal.style.display='none';
+      if(lastFocusedEl) lastFocusedEl.focus();
+    }
+
+    // Smooth fade-in for lazy images
+    window.addEventListener('load', () => {
+      document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        if(img.complete){ img.style.opacity='1'; }
+        else { img.addEventListener('load', () => img.style.opacity='1'); }
+      });
+    });
   </script>
 </head>
 
 <body>
-  <header class="hero">
+  <header class="hero" role="banner">
     <div class="container hero-inner">
       <div class="brand">
-        <div class="avatar">HZ</div>
+        <div class="avatar" aria-hidden="true">HZ</div>
         <div>
-          <div class="name">Hadill Zaher</div>
-    <div class="role">
-      Accounting &amp; Finance Graduate — London<br>
-      <span style="color:var(--brand-2);font-weight:500;">
-        Fintech | Data Analytics | Financial Modelling
-      </span>
-    </div>
+          <div class="name" aria-label="Name">Hadill Zaher</div>
+          <div class="role">
+            Accounting &amp; Finance Graduate — London<br>
+            <span style="color:var(--brand-2);font-weight:500;">
+              Fintech | Data Analytics | Financial Modelling
+            </span>
+          </div>
+          <!-- NEW: career goal / value statement -->
+          <p style="color:var(--muted);font-size:.9rem;margin-top:6px;">
+            🎯 Seeking graduate opportunities in asset management, fintech analytics, or investment research.
+          </p>
         </div>
       </div>
-      <div class="actions">
+      <div class="actions" role="navigation" aria-label="Primary">
         <a class="btn btn-outline" href="#contact">Contact</a>
         <a class="btn" href="#projects">Projects</a>
         <a class="btn" href="LinkedinHadillZaherCV.pdf" target="_blank" rel="noopener">Download CV</a>
-        <button class="btn" onclick="toggleTheme()">🌗</button>
+        <button class="btn" onclick="toggleTheme()" aria-label="Toggle light and dark theme">🌗</button>
       </div>
     </div>
   </header>
 
-
-
-  <main class="container">
+  <main class="container" role="main">
     <!-- About -->
-    <section id="about" class="card">
+    <section id="about" class="card" aria-labelledby="about-title">
+      <h1 id="about-title" class="sr-only">About</h1>
       <div class="grid grid-2">
         <div>
           <h1>Hi, I’m Hadill.</h1>
           <p class="muted">
-I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, specialising in fintech and quantitative analysis. I’m passionate about applying Python, Excel, and financial modelling to uncover trends, value companies, and enhance investment performance.          </p>
+            I’m a 2025 Accounting &amp; Finance graduate (2:1) from Bayes Business School, specialising in fintech and quantitative analysis. I’m passionate about applying Python, Excel, and financial modelling to uncover trends, value companies, and enhance investment performance.
+          </p>
+          <!-- NEW: professional summary line -->
+          <p class="muted" style="margin-top:6px;">
+            I’m driven by the intersection of finance and technology, using quantitative analysis to turn complex data into clear investment insight.
+          </p>
           <div class="tags" style="margin-top:12px">
             <span class="badge">Financial Analysis</span>
             <span class="badge">Valuation</span>
@@ -174,7 +210,7 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
           </div>
         </div>
 
-        <div class="kvs">
+        <div class="kvs" aria-label="Key details">
           <div class="muted">Email</div>
           <div><a href="mailto:miss.hzaher@gmail.com">miss.hzaher@gmail.com</a></div>
           <div class="muted">LinkedIn</div>
@@ -187,525 +223,547 @@ I’m a 2025 Accounting & Finance graduate (2:1) from Bayes Business School, spe
       </div>
     </section>
 
+    <!-- NEW: Key Highlights -->
+    <section class="card" aria-labelledby="highlights-title">
+      <h2 id="highlights-title">📌 Key Highlights</h2>
+      <ul class="muted">
+        <li>Top 5% ranking in university trading competition (Sharpe &gt; 1.5)</li>
+        <li>Improved Python/Excel dashboard efficiency by 40%</li>
+        <li>Developed 6+ financial models covering ESG, credit risk &amp; stress testing</li>
+      </ul>
+    </section>
+
     <!-- 🏆 Achievements & Highlights -->
-<div class="section-title" id="achievements">
-  <h2>🏆 Achievements & Highlights</h2>
-</div>
+    <div class="section-title" id="achievements">
+      <h2>🏆 Achievements &amp; Highlights</h2>
+    </div>
 
-<section class="grid grid-3">
-  <article class="card">
-    <h3>📊 Fintech Data Analytics</h3>
-    <p class="muted">
-      Built Python + Excel dashboards tracking fintech valuations and volatility across 5 global firms, improving analysis efficiency by <b>40%</b>.
+    <section class="grid grid-3" aria-label="Achievements">
+      <article class="card">
+        <h3>📊 Fintech Data Analytics</h3>
+        <p class="muted">
+          Built Python + Excel dashboards tracking fintech valuations and volatility across 5 global firms, improving analysis efficiency by <b>40%</b>.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>🎓 Bayes Business School (2025)</h3>
+        <p class="muted">
+          Graduated with a <b>2:1 in Accounting &amp; Finance</b> from Bayes, focusing on fintech, financial regulation, and quantitative modelling.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>💡 Investment Research &amp; Strategy</h3>
+        <p class="muted">
+          Conducted portfolio simulations using Python (Pandas, NumPy), testing rebalancing and stress scenarios — applied insights to personal ETF portfolio.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>🏦 Banking System Analysis</h3>
+        <p class="muted">
+          Modelled 2024 <b>Credit Suisse</b> and <b>SVB</b> collapses to simulate contagion risk and liquidity stress; visualised outcomes with Matplotlib.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>📈 Trading &amp; Market Insight</h3>
+        <p class="muted">
+          Previous member of <b>Trading Society</b> — achieved <b>Top 5%</b> ranking in simulated portfolio competition with a Sharpe ratio above 1.5.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>🤝 Leadership &amp; Mentorship</h3>
+        <p class="muted">
+          Tutored A-Level students in Economics and Maths, simplifying quantitative finance concepts and improving average grades by 20%.
+        </p>
+      </article>
+    </section>
+
+    <!-- NEW: Education -->
+    <div class="section-title" id="education"><h2>🎓 Education</h2></div>
+    <section class="card" aria-label="Education">
+      <h3>Bayes Business School, City, University of London</h3>
+      <p class="muted">BSc (Hons) Accounting &amp; Finance — 2:1 (Graduated 2025)</p>
+      <p class="muted">Relevant Modules: Financial Management, Banking &amp; Regulation, Quantitative Methods, Fintech Innovation.</p>
+    </section>
+
+    <!-- NEW: Work Experience -->
+    <div class="section-title" id="experience"><h2>💼 Experience</h2></div>
+    <section class="grid grid-2" aria-label="Experience">
+      <article class="card">
+        <h3>Sales Assistant — Lovisa</h3>
+        <p class="muted">Delivered customer service and managed daily transactions, strengthening attention to detail and communication.</p>
+      </article>
+      <article class="card">
+        <h3>Trainee Accountant — Double Eleven Management Ltd</h3>
+        <p class="muted">Assisted with financial statements, bank reconciliations and invoice reviews using Excel and Xero.</p>
+      </article>
+      <article class="card">
+        <h3>Investment Management Intern — Bright Network</h3>
+        <p class="muted">Completed virtual programme on portfolio management and ESG integration, applying financial modelling concepts in practice.</p>
+      </article>
+      <article class="card">
+        <h3>Private Tutor — Self-Employed</h3>
+        <p class="muted">Tutored A-Level Economics and Maths, helping students improve average grades by 20% through applied finance examples.</p>
+      </article>
+    </section>
+
+    <!-- ⚙️ Skills & Tools -->
+    <div class="section-title" id="skills">
+      <h2>⚙️ Skills &amp; Tools</h2>
+    </div>
+
+    <section class="grid grid-3" aria-label="Skills and Tools">
+      <article class="card">
+        <h3>📊 Data Analysis &amp; Modelling</h3>
+        <p class="muted">
+          <b>Python (Pandas, NumPy, Matplotlib)</b> — data cleaning, performance analytics, and visualization.<br>
+          Proficient in <b>Excel &amp; Power Query</b> for dashboard automation and scenario modelling.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>💻 Financial &amp; Valuation Tools</h3>
+        <p class="muted">
+          Experience with <b>DCF valuation models</b>, <b>banking stress tests</b>, and <b>portfolio simulations</b>.<br>
+          Skilled in <b>Bloomberg-style analytics</b> using Python data APIs (<code>yfinance</code>, <code>FRED</code>).
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>🏦 Fintech &amp; Markets</h3>
+        <p class="muted">
+          Familiar with <b>trading systems</b>, <b>crypto/ETF analysis</b>, and <b>financial regulation</b>.<br>
+          Focused on fintech innovation, market microstructure, and quantitative insights.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>🧠 Software &amp; Databases</h3>
+        <p class="muted">
+          <b>SQL</b> for structured queries, <b>Power BI</b> for reporting, <b>GitHub</b> for version control,<br>
+          and <b>FastAPI</b> for lightweight web-based analytics applications.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>🤖 Programming &amp; Automation</h3>
+        <p class="muted">
+          Automating financial reports, Excel data pipelines, and REST API integrations using <b>Python</b> scripts.<br>
+          Enthusiastic about applying <b>AI/ML</b> for investment insights.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>🧰 Core Strengths</h3>
+        <p class="muted">
+          Analytical mindset, clear communication, attention to detail, and collaborative teamwork.<br>
+          Comfortable translating complex financial models into actionable insights.
+        </p>
+      </article>
+    </section>
+
+    <!-- Skill Badges -->
+    <div style="text-align:center;margin-top:18px;">
+      <span class="badge">🐍 Python</span>
+      <span class="badge">📈 Excel</span>
+      <span class="badge">🧮 Pandas</span>
+      <span class="badge">💻 SQL</span>
+      <span class="badge">📊 Power BI</span>
+      <span class="badge">⚙️ FastAPI</span>
+      <span class="badge">💡 Financial Modelling</span>
+      <span class="badge">🏦 Fintech Analytics</span>
+    </div>
+
+    <p class="muted" style="text-align:center;margin-top:10px;">
+      💼 Explore my finance &amp; fintech projects below — combining data, analytics, and strategy.
     </p>
-  </article>
-
-  <article class="card">
-    <h3>🎓 Bayes Business School (2025)</h3>
-    <p class="muted">
-      Graduated with a <b>2:1 in Accounting & Finance</b> from Bayes, focusing on fintech, financial regulation, and quantitative modelling.
-    </p>
-  </article>
-
-  <article class="card">
-    <h3>💡 Investment Research & Strategy</h3>
-    <p class="muted">
-      Conducted portfolio simulations using Python (Pandas, NumPy), testing rebalancing and stress scenarios — applied insights to personal ETF portfolio.
-    </p>
-  </article>
-
-  <article class="card">
-    <h3>🏦 Banking System Analysis</h3>
-    <p class="muted">
-      Modelled 2024 <b>Credit Suisse</b> and <b>SVB</b> collapses to simulate contagion risk and liquidity stress; visualised outcomes with Matplotlib.
-    </p>
-  </article>
-
-  <article class="card">
-    <h3>📈 Trading & Market Insight</h3>
-    <p class="muted">
-      Previous member of <b>Trading Society</b> — achieved <b>Top 5%</b> ranking in simulated portfolio competition with a Sharpe ratio above 1.5.
-    </p>
-  </article>
-
-  <article class="card">
-    <h3>🤝 Leadership & Mentorship</h3>
-    <p class="muted">
-      Tutored A-Level students in Economics and Maths, simplifying quantitative finance concepts and improving average grades by 20%.
-    </p>
-  </article>
-</section>
-
-
-  <!-- ⚙️ Skills & Tools -->
-<div class="section-title" id="skills">
-  <h2>⚙️ Skills & Tools</h2>
-</div>
-
-<section class="grid grid-3">
-  <!-- 🧮 Data & Analytics -->
-  <article class="card">
-    <h3>📊 Data Analysis & Modelling</h3>
-    <p class="muted">
-      <b>Python (Pandas, NumPy, Matplotlib)</b> — data cleaning, performance analytics, and visualization.  
-      <br>Proficient in <b>Excel & Power Query</b> for dashboard automation and scenario modelling.
-    </p>
-  </article>
-
-  <!-- 💻 Financial Tools -->
-  <article class="card">
-    <h3>💻 Financial & Valuation Tools</h3>
-    <p class="muted">
-      Experience with <b>DCF valuation models</b>, <b>banking stress tests</b>, and <b>portfolio simulations</b>.  
-      Skilled in <b>Bloomberg-style analytics</b> using Python data APIs (<code>yfinance</code>, <code>FRED</code>).
-    </p>
-  </article>
-
-  <!-- 🏦 Fintech & Markets -->
-  <article class="card">
-    <h3>🏦 Fintech & Markets</h3>
-    <p class="muted">
-      Familiar with <b>trading systems</b>, <b>crypto/ETF analysis</b>, and <b>financial regulation</b>.  
-      Focused on fintech innovation, market microstructure, and quantitative insights.
-    </p>
-  </article>
-
-  <!-- 📈 Software & Databases -->
-  <article class="card">
-    <h3>🧠 Software & Databases</h3>
-    <p class="muted">
-      <b>SQL</b> for structured queries, <b>Power BI</b> for reporting, <b>GitHub</b> for version control,  
-      and <b>FastAPI</b> for lightweight web-based analytics applications.
-    </p>
-  </article>
-
-  <!-- 🤖 Programming & Automation -->
-  <article class="card">
-    <h3>🤖 Programming & Automation</h3>
-    <p class="muted">
-      Automating financial reports, Excel data pipelines, and REST API integrations using <b>Python</b> scripts.  
-      Enthusiastic about applying <b>AI/ML</b> for investment insights.
-    </p>
-  </article>
-
-  <!-- 🧰 Soft Skills -->
-  <article class="card">
-    <h3>🧰 Core Strengths</h3>
-    <p class="muted">
-      Analytical mindset, clear communication, attention to detail, and collaborative teamwork.  
-      Comfortable translating complex financial models into actionable insights.
-    </p>
-  </article>
-</section>
-
-<!-- Skill Badges -->
-<div style="text-align:center;margin-top:18px;">
-  <span class="badge">🐍 Python</span>
-  <span class="badge">📈 Excel</span>
-  <span class="badge">🧮 Pandas</span>
-  <span class="badge">💻 SQL</span>
-  <span class="badge">📊 Power BI</span>
-  <span class="badge">⚙️ FastAPI</span>
-  <span class="badge">💡 Financial Modelling</span>
-  <span class="badge">🏦 Fintech Analytics</span>
-</div>
-
-
-<p class="muted" style="text-align:center;margin-top:10px;">
-  💼 Explore my finance & fintech projects below — combining data, analytics, and strategy.
-</p>
-
 
     <!-- 🧠 Projects & Research -->
-<div class="section-title" id="projects">
-  <h2>Projects &amp; Research</h2>
-</div>
+    <div class="section-title" id="projects">
+      <h2>Projects &amp; Research</h2>
+    </div>
 
-<section class="grid grid-2">
-  <!-- 1️⃣ Fintech Valuation Tracker -->
-  <article class="card" role="article">
-    <h3>📈 Fintech Valuation Tracker</h3>
-    <p class="muted">
-      Dashboard using Python & Excel to track fintech stock performance and visualize P/E trends with Matplotlib.
-    </p>
-    <button class="btn" onclick="openModal('modalValuation')" aria-haspopup="dialog" aria-controls="modalValuation">
-      View Analysis
-    </button>
-  </article>
+    <section class="grid grid-2" aria-label="Projects">
+      <article class="card" role="article">
+        <h3>📈 Fintech Valuation Tracker</h3>
+        <p class="muted">
+          Dashboard using Python &amp; Excel to track fintech stock performance and visualize P/E trends with Matplotlib.
+          <br><b>Result:</b> Faster screening of valuation shifts across selected fintechs.
+        </p>
+        <button class="btn" onclick="openModal('modalValuation')" aria-haspopup="dialog" aria-controls="modalValuation">
+          View Analysis
+        </button>
+      </article>
 
-  <!-- 2️⃣ Personal Investing Playbook -->
-  <article class="card" role="article">
-    <h3>💰 Personal Investing Playbook</h3>
-    <p class="muted">
-      Long-term ETF model with DCA and rebalancing logic. Templates to forecast returns and improve budgeting.
-    </p>
-    <button class="btn" onclick="openModal('modalPlaybook')" aria-haspopup="dialog" aria-controls="modalPlaybook">
-      View Analysis
-    </button>
-  </article>
+      <article class="card" role="article">
+        <h3>💰 Personal Investing Playbook</h3>
+        <p class="muted">
+          Long-term ETF model with DCA and rebalancing logic. Templates to forecast returns and improve budgeting.
+          <br><b>Result:</b> Clearer DCA planning and allocation drift monitoring.
+        </p>
+        <button class="btn" onclick="openModal('modalPlaybook')" aria-haspopup="dialog" aria-controls="modalPlaybook">
+          View Analysis
+        </button>
+      </article>
 
-  <!-- 3️⃣ Banking Crises & Stress Testing -->
-  <article class="card" role="article">
-    <h3>🏦 Banking Crises & Stress Testing (2024)</h3>
-    <p class="muted">
-      SVB & Credit Suisse analysis: contagion, liquidity risk, and central bank interventions.
-    </p>
-    <button class="btn" onclick="openModal('modalStress')" aria-haspopup="dialog" aria-controls="modalStress">
-      View Analysis
-    </button>
-  </article>
+      <article class="card" role="article">
+        <h3>🏦 Banking Crises &amp; Stress Testing (2024)</h3>
+        <p class="muted">
+          SVB &amp; Credit Suisse analysis: contagion, liquidity risk, and central bank interventions.
+          <br><b>Result:</b> Quantified rate-shock sensitivity and systemic contagion pathways.
+        </p>
+        <button class="btn" onclick="openModal('modalStress')" aria-haspopup="dialog" aria-controls="modalStress">
+          View Analysis
+        </button>
+      </article>
 
-  <!-- 4️⃣ Fintech vs Banks -->
-  <article class="card" role="article">
-    <h3>📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
-    <p class="muted">
-      Python-based 3-year comparison (yfinance, pandas): Sharpe, volatility, drawdowns, and Excel dashboard.
-    </p>
-    <button class="btn" onclick="openModal('modal1')" aria-haspopup="dialog" aria-controls="modal1">
-      View Analysis
-    </button>
-  </article>
+      <article class="card" role="article">
+        <h3>📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
+        <p class="muted">
+          Python-based 3-year comparison (yfinance, pandas): Sharpe, volatility, drawdowns, and Excel dashboard.
+          <br><b>Result:</b> Comparative risk-adjusted performance insights for sector allocation.
+        </p>
+        <button class="btn" onclick="openModal('modal1')" aria-haspopup="dialog" aria-controls="modal1">
+          View Analysis
+        </button>
+      </article>
 
-<!-- 5️⃣ ESG Sustainable Investing -->
-<article class="card" role="article">
-  <h3>🌿 ESG Sustainable Investing (Backtest)</h3>
-  <p class="muted">
-    Simulated relationship between ESG scores, returns, and volatility. Includes Excel dashboard with tier summaries.
-  </p>
-  <button class="btn" onclick="openModal('modalESG')" aria-haspopup="dialog" aria-controls="modalESG">
-    View Analysis
-  </button>
-</article>
+      <article class="card" role="article">
+        <h3>🌿 ESG Sustainable Investing (Backtest)</h3>
+        <p class="muted">
+          Simulated relationship between ESG scores, returns, and volatility. Includes Excel dashboard with tier summaries.
+          <br><b>Result:</b> Evidence on ESG tier differences in average volatility and returns.
+        </p>
+        <button class="btn" onclick="openModal('modalESG')" aria-haspopup="dialog" aria-controls="modalESG">
+          View Analysis
+        </button>
+      </article>
 
-<!-- 6️⃣ Credit Risk Modeling -->
-<article class="card" role="article">
-  <h3>💳 Credit Risk Modeling (PD / Loss)</h3>
-  <p class="muted">
-    Portfolio-level probability of default model and loss distribution. Includes Excel dashboard + PD curve.
-  </p>
-  <button class="btn" onclick="openModal('modalCredit')" aria-haspopup="dialog" aria-controls="modalCredit">
-    View Analysis
-  </button>
-</article>
-</section>
+      <article class="card" role="article">
+        <h3>💳 Credit Risk Modeling (PD / Loss)</h3>
+        <p class="muted">
+          Portfolio-level probability of default model and loss distribution. Includes Excel dashboard + PD curve.
+          <br><b>Result:</b> Visual PD curve and loss distribution for credit exposure scenarios.
+        </p>
+        <button class="btn" onclick="openModal('modalCredit')" aria-haspopup="dialog" aria-controls="modalCredit">
+          View Analysis
+        </button>
+      </article>
+    </section>
 
-  
+    <!-- === MODALS === -->
 
-<!-- === MODALS === -->
-
-<!-- 📊 Fintech vs Banks Modal -->
-<div id="modal1" class="modal" role="dialog" aria-labelledby="modal1-title" aria-modal="true" onclick="if(event.target===this)closeModal('modal1')">
-  <div class="modal-content">
-    <button class="close" onclick="closeModal('modal1')" aria-label="Close dialog">&times;</button>
-    <h3 id="modal1-title">📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
-    <p class="muted">
-      Built with <b>pandas, numpy, matplotlib, yfinance</b>. Metrics: <b>annualized return, volatility, Sharpe, drawdown, correlations</b>.
-      Outputs: <b>Fintech_vs_Banks_3Y_Report.xlsx</b>.
-    </p>
-    <ul class="muted">
-      <li>📈 <b>Cumulative Return Chart:</b> 3-year comparative performance</li>
-      <li>📊 <b>Rolling 6-Month Sharpe:</b> risk-adjusted returns</li>
-      <li>📉 <b>Correlation Heatmap:</b> diversification insight</li>
-      <li>📘 <b>Excel Dashboard:</b> automated summary & visuals</li>
-    </ul>
-    <div class="charts-container">
-      <div>
-        <img src="assets/fintech_banks_cumulative.png?v=10" alt="Cumulative Returns Chart" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.2)">
-        <p class="muted">Figure 1: Cumulative Returns (3-Year)</p>
-      </div>
-      <div>
-        <img src="assets/rolling_sharpe.png?v=10" alt="Rolling Sharpe Ratios Chart" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.2)">
-        <p class="muted">Figure 2: Rolling 6-Month Sharpe</p>
-      </div>
-      <div>
-        <img src="assets/correlation_heatmap.png?v=10" alt="Correlation Heatmap" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.2)">
-        <p class="muted">Figure 3: Correlation Heatmap</p>
+    <!-- 📊 Fintech vs Banks Modal -->
+    <div id="modal1" class="modal" role="dialog" aria-labelledby="modal1-title" aria-modal="true" onclick="if(event.target===this)closeModal('modal1')">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('modal1')" aria-label="Close dialog">&times;</button>
+        <h3 id="modal1-title">📊 Fintech vs Banks Quantitative Analysis (2025)</h3>
+        <p class="muted">
+          Built with <b>pandas, numpy, matplotlib, yfinance</b>. Metrics: <b>annualized return, volatility, Sharpe, drawdown, correlations</b>.
+          Outputs: <b>Fintech_vs_Banks_3Y_Report.xlsx</b>.
+        </p>
+        <ul class="muted">
+          <li>📈 <b>Cumulative Return Chart:</b> 3-year comparative performance</li>
+          <li>📊 <b>Rolling 6-Month Sharpe:</b> risk-adjusted returns</li>
+          <li>📉 <b>Correlation Heatmap:</b> diversification insight</li>
+          <li>📘 <b>Excel Dashboard:</b> automated summary &amp; visuals</li>
+        </ul>
+        <div class="charts-container">
+          <div>
+            <img loading="lazy" src="assets/fintech_banks_cumulative.png?v=10" alt="Cumulative Returns Chart showing fintech vs banks over 3 years">
+            <p class="muted">Figure 1: Cumulative Returns (3-Year)</p>
+          </div>
+          <div>
+            <img loading="lazy" src="assets/rolling_sharpe.png?v=10" alt="Rolling Sharpe Ratios Chart">
+            <p class="muted">Figure 2: Rolling 6-Month Sharpe</p>
+          </div>
+          <div>
+            <img loading="lazy" src="assets/correlation_heatmap.png?v=10" alt="Correlation Heatmap between selected assets">
+            <p class="muted">Figure 3: Correlation Heatmap</p>
+          </div>
+        </div>
+        <div style="margin-top:22px;text-align:center;">
+          <a class="btn" href="Fintech_vs_Banks_3Y_Report.xlsx?v=10" target="_blank" rel="noopener" download>📥 Download Excel Report</a>
+        </div>
       </div>
     </div>
-    <div style="margin-top:22px;text-align:center;">
-      <a class="btn" href="Fintech_vs_Banks_3Y_Report.xlsx?v=10" target="_blank" rel="noopener" download>📥 Download Excel Report</a>
-    </div>
-  </div>
-</div>
 
-<!-- 📈 Fintech Valuation Tracker Modal -->
-<div id="modalValuation" class="modal" role="dialog" aria-labelledby="modalValuation-title" aria-modal="true" onclick="if(event.target===this)closeModal('modalValuation')">
-  <div class="modal-content">
-    <button class="close" onclick="closeModal('modalValuation')" aria-label="Close dialog">&times;</button>
-    <h3 id="modalValuation-title">📈 Fintech Valuation Tracker</h3>
-    <p class="muted">
-      Python + Excel workflow tracking selected fintechs’ P/E and price performance. Prices via <code>yfinance</code>.
-      P/E trendlines use trailing EPS where available (via quarterly earnings) and visualize valuation shifts with Matplotlib.
-    </p>
-    <ul class="muted">
-      <li>🧮 Metrics: trailing P/E (if available), rolling returns, simple factor screens</li>
-      <li>📊 Visuals: P/E trendlines & performance overlays</li>
-      <li>📘 Output: Excel workbook with charts & filters</li>
-    </ul>
-    <div class="charts-container">
-      <div>
-        <img src="assets/fintech_prices_normalized.png?v=10" alt="Fintech Prices Indexed to 100" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.2)">
-        <p class="muted">Figure 1: Fintech Price Performance (Indexed to 100)</p>
-      </div>
-      <div>
-        <img src="assets/fintech_pe_quarterly.png?v=10" alt="Fintech P/E Trendlines" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.2)">
-        <p class="muted">Figure 2: Fintech P/E Trendlines — Quarterly (Price / TTM EPS)</p>
+    <!-- 📈 Fintech Valuation Tracker Modal -->
+    <div id="modalValuation" class="modal" role="dialog" aria-labelledby="modalValuation-title" aria-modal="true" onclick="if(event.target===this)closeModal('modalValuation')">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('modalValuation')" aria-label="Close dialog">&times;</button>
+        <h3 id="modalValuation-title">📈 Fintech Valuation Tracker</h3>
+        <p class="muted">
+          Python + Excel workflow tracking selected fintechs’ P/E and price performance. Prices via <code>yfinance</code>.
+          P/E trendlines use trailing EPS where available (via quarterly earnings) and visualize valuation shifts with Matplotlib.
+        </p>
+        <ul class="muted">
+          <li>🧮 Metrics: trailing P/E (if available), rolling returns, simple factor screens</li>
+          <li>📊 Visuals: P/E trendlines &amp; performance overlays</li>
+          <li>📘 Output: Excel workbook with charts &amp; filters</li>
+        </ul>
+        <div class="charts-container">
+          <div>
+            <img loading="lazy" src="assets/fintech_prices_normalized.png?v=10" alt="Fintech Prices Indexed to 100">
+            <p class="muted">Figure 1: Fintech Price Performance (Indexed to 100)</p>
+          </div>
+          <div>
+            <img loading="lazy" src="assets/fintech_pe_quarterly.png?v=10" alt="Fintech P/E Trendlines — Quarterly (Price / TTM EPS)">
+            <p class="muted">Figure 2: Fintech P/E Trendlines — Quarterly (Price / TTM EPS)</p>
+          </div>
+        </div>
+        <div style="margin-top:22px;text-align:center;">
+          <a class="btn" href="Fintech_PE_Dashboard.xlsx?v=10" target="_blank" rel="noopener" download>📥 Download Excel Dashboard</a>
+        </div>
       </div>
     </div>
-    <div style="margin-top:22px;text-align:center;">
-      <a class="btn" href="Fintech_PE_Dashboard.xlsx?v=10" target="_blank" rel="noopener" download>📥 Download Excel Dashboard</a>
-    </div>
-  </div>
-</div>
 
-<!-- 💰 Personal Investing Playbook Modal -->
-<div id="modalPlaybook" class="modal" role="dialog" aria-labelledby="modalPlaybook-title" aria-modal="true" onclick="if(event.target===this)closeModal('modalPlaybook')">
-  <div class="modal-content">
-    <button class="close" onclick="closeModal('modalPlaybook')" aria-label="Close dialog">&times;</button>
-    <h3 id="modalPlaybook-title">💰 Personal Investing Playbook</h3>
-    <p class="muted">
-      Python + Excel model simulating <b>dollar-cost averaging (DCA)</b> into a 70/30 equity-bond portfolio over 10 years.
-      Tracks portfolio growth, rebalancing triggers, and return metrics using <code>numpy</code>, <code>pandas</code>, and <code>matplotlib</code>.
-    </p>
-    <ul class="muted">
-      <li>⚙️ Logic: Monthly £500 DCA, 5% rebalance threshold</li>
-      <li>📈 Growth: total portfolio vs total invested</li>
-      <li>⚖️ Allocation drift + rebalance visualization</li>
-      <li>📘 Output: downloadable Excel dashboard</li>
-    </ul>
-    <div class="charts-container">
-      <div>
-        <img src="assets/playbook_projection.png?v=10" alt="Portfolio Growth Projection" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.2)">
-        <p class="muted">Figure 1: Portfolio Growth Projection</p>
-      </div>
-      <div>
-        <img src="assets/playbook_rebalance.png?v=10" alt="Rebalancing and Allocation Drift" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.2)">
-        <p class="muted">Figure 2: Rebalancing and Allocation Drift</p>
+    <!-- 💰 Personal Investing Playbook Modal -->
+    <div id="modalPlaybook" class="modal" role="dialog" aria-labelledby="modalPlaybook-title" aria-modal="true" onclick="if(event.target===this)closeModal('modalPlaybook')">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('modalPlaybook')" aria-label="Close dialog">&times;</button>
+        <h3 id="modalPlaybook-title">💰 Personal Investing Playbook</h3>
+        <p class="muted">
+          Python + Excel model simulating <b>dollar-cost averaging (DCA)</b> into a 70/30 equity-bond portfolio over 10 years.
+          Tracks portfolio growth, rebalancing triggers, and return metrics using <code>numpy</code>, <code>pandas</code>, and <code>matplotlib</code>.
+        </p>
+        <ul class="muted">
+          <li>⚙️ Logic: Monthly £500 DCA, 5% rebalance threshold</li>
+          <li>📈 Growth: total portfolio vs total invested</li>
+          <li>⚖️ Allocation drift + rebalance visualization</li>
+          <li>📘 Output: downloadable Excel dashboard</li>
+        </ul>
+        <div class="charts-container">
+          <div>
+            <img loading="lazy" src="assets/playbook_projection.png?v=10" alt="Portfolio Growth Projection">
+            <p class="muted">Figure 1: Portfolio Growth Projection</p>
+          </div>
+          <div>
+            <img loading="lazy" src="assets/playbook_rebalance.png?v=10" alt="Rebalancing and Allocation Drift">
+            <p class="muted">Figure 2: Rebalancing and Allocation Drift</p>
+          </div>
+        </div>
+        <div style="margin-top:22px;text-align:center;">
+          <a class="btn" href="Personal_Investing_Playbook.xlsx?v=10" target="_blank" rel="noopener" download>📥 Download Excel Dashboard</a>
+        </div>
       </div>
     </div>
-    <div style="margin-top:22px;text-align:center;">
-      <a class="btn" href="Personal_Investing_Playbook.xlsx?v=10" target="_blank" rel="noopener" download>📥 Download Excel Dashboard</a>
-    </div>
-  </div>
-</div>
 
-<!-- 🏦 Banking Crises & Stress Testing Modal -->
-<div id="modalStress" class="modal" role="dialog" aria-labelledby="modalStress-title" aria-modal="true" onclick="if(event.target===this)closeModal('modalStress')">
-  <div class="modal-content">
-    <button class="close" onclick="closeModal('modalStress')" aria-label="Close dialog">&times;</button>
-    <h3 id="modalStress-title">🏦 Banking Crises & Stress Testing (2024)</h3>
-    <p class="muted">
-      Simulated case study of <b>SVB</b> and <b>Credit Suisse</b> collapses using Python — exploring <b>liquidity stress, contagion risk,</b> and <b>systemic propagation</b>.
-      This model quantifies how rising rates erode bond portfolios and how defaults can spread through an interconnected banking system.
-    </p>
-    <ul class="muted">
-      <li>📉 <b>Liquidity Stress:</b> Duration-based sensitivity of bond portfolios to rate shocks</li>
-      <li>🏦 <b>Contagion Network:</b> Simulated interbank exposures showing systemic propagation</li>
-      <li>📘 <b>Output:</b> Excel dashboard with stress tables and embedded charts</li>
-    </ul>
-    <div class="charts-container">
-      <div>
-        <img src="assets/stress_liquidity.png?v=10" alt="Liquidity Stress Simulation" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.2)">
-        <p class="muted">Figure 1: Liquidity Stress — Bond Value Sensitivity</p>
-      </div>
-      <div>
-        <img src="assets/stress_contagion.png?v=10" alt="Systemic Contagion Propagation" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.2)">
-        <p class="muted">Figure 2: Systemic Contagion — Default Propagation</p>
-      </div>
-    </div>
-    <div style="margin-top:22px;text-align:center;">
-      <a class="btn" href="Banking_Stress_Testing_2024.xlsx?v=10" target="_blank" rel="noopener" download>📥 Download Excel Dashboard</a>
-    </div>
-  </div>
-</div>
-
-
-<!-- 🌿 ESG Sustainable Investing Modal -->
-<div id="modalESG" class="modal" role="dialog" aria-labelledby="modalESG-title" aria-modal="true" onclick="if(event.target===this)closeModal('modalESG')">
-  <div class="modal-content">
-    <button class="close" onclick="closeModal('modalESG')" aria-label="Close dialog">&times;</button>
-    <h3 id="modalESG-title">🌿 ESG Sustainable Investing (Backtest)</h3>
-    <p class="muted">
-      Dataset of 120 securities with ESG scores, 1-year returns, and simulated volatility tiers (Low/Mid/High ESG).
-      Visuals show return relationship and average volatility by ESG tier. Excel dashboard included.
-    </p>
-    <ul class="muted">
-      <li>📈 ESG vs Return (scatter + regression)</li>
-      <li>📉 Average Volatility by ESG Tier</li>
-      <li>📘 Excel: Raw data, summary, embedded chart</li>
-    </ul>
-    <div class="charts-container">
-      <div>
-        <img src="assets/esg_scatter.png?v=1" alt="ESG Score vs 1Y Return" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.2)">
-        <p class="muted">Figure 1: ESG Score vs 1-Year Return</p>
-      </div>
-      <div>
-        <img src="assets/esg_volatility.png?v=1" alt="Average Volatility by ESG Tier" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.2)">
-        <p class="muted">Figure 2: Average Volatility by ESG Tier</p>
+    <!-- 🏦 Banking Crises & Stress Testing Modal -->
+    <div id="modalStress" class="modal" role="dialog" aria-labelledby="modalStress-title" aria-modal="true" onclick="if(event.target===this)closeModal('modalStress')">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('modalStress')" aria-label="Close dialog">&times;</button>
+        <h3 id="modalStress-title">🏦 Banking Crises &amp; Stress Testing (2024)</h3>
+        <p class="muted">
+          Simulated case study of <b>SVB</b> and <b>Credit Suisse</b> collapses using Python — exploring <b>liquidity stress, contagion risk,</b> and <b>systemic propagation</b>.
+          This model quantifies how rising rates erode bond portfolios and how defaults can spread through an interconnected banking system.
+        </p>
+        <ul class="muted">
+          <li>📉 <b>Liquidity Stress:</b> Duration-based sensitivity of bond portfolios to rate shocks</li>
+          <li>🏦 <b>Contagion Network:</b> Simulated interbank exposures showing systemic propagation</li>
+          <li>📘 <b>Output:</b> Excel dashboard with stress tables and embedded charts</li>
+        </ul>
+        <div class="charts-container">
+          <div>
+            <img loading="lazy" src="assets/stress_liquidity.png?v=10" alt="Liquidity Stress Simulation">
+            <p class="muted">Figure 1: Liquidity Stress — Bond Value Sensitivity</p>
+          </div>
+          <div>
+            <img loading="lazy" src="assets/stress_contagion.png?v=10" alt="Systemic Contagion Propagation">
+            <p class="muted">Figure 2: Systemic Contagion — Default Propagation</p>
+          </div>
+        </div>
+        <div style="margin-top:22px;text-align:center;">
+          <a class="btn" href="Banking_Stress_Testing_2024.xlsx?v=10" target="_blank" rel="noopener" download>📥 Download Excel Dashboard</a>
+        </div>
       </div>
     </div>
-    <div style="margin-top:22px;text-align:center;">
-      <a class="btn" href="CODE/ESG_Sustainable_Investing_Dashboard.xlsx?v=1" target="_blank" rel="noopener" download>
-        📥 Download Excel Dashboard
-      </a>
-    </div>
-  </div>
-</div>
 
-<!-- 💳 Credit Risk Modeling Modal -->
-<div id="modalCredit" class="modal" role="dialog" aria-labelledby="modalCredit-title" aria-modal="true" onclick="if(event.target===this)closeModal('modalCredit')">
-  <div class="modal-content">
-    <button class="close" onclick="closeModal('modalCredit')" aria-label="Close dialog">&times;</button>
-    <h3 id="modalCredit-title">💳 Credit Risk Modeling (PD / Loss)</h3>
-    <p class="muted">
-      Modeled PD as a logistic function of credit score (450–850), simulated defaults and portfolio losses. 
-      Includes an Excel dashboard with a PD curve table and charts.
-    </p>
-    <ul class="muted">
-      <li>📉 PD vs Credit Score (curve + scatter)</li>
-      <li>📊 Loss Distribution (defaults only)</li>
-      <li>📘 Excel: Raw data, summary, PD curve chart</li>
-    </ul>
-    <div class="charts-container">
-      <div>
-        <img src="assets/credit_pd_curve.png?v=1" alt="PD vs Credit Score" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.2)">
-        <p class="muted">Figure 1: Probability of Default vs Credit Score</p>
+    <!-- 🌿 ESG Sustainable Investing Modal -->
+    <div id="modalESG" class="modal" role="dialog" aria-labelledby="modalESG-title" aria-modal="true" onclick="if(event.target===this)closeModal('modalESG')">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('modalESG')" aria-label="Close dialog">&times;</button>
+        <h3 id="modalESG-title">🌿 ESG Sustainable Investing (Backtest)</h3>
+        <p class="muted">
+          Dataset of 120 securities with ESG scores, 1-year returns, and simulated volatility tiers (Low/Mid/High ESG).
+          Visuals show return relationship and average volatility by ESG tier. Excel dashboard included.
+        </p>
+        <ul class="muted">
+          <li>📈 ESG vs Return (scatter + regression)</li>
+          <li>📉 Average Volatility by ESG Tier</li>
+          <li>📘 Excel: Raw data, summary, embedded chart</li>
+        </ul>
+        <div class="charts-container">
+          <div>
+            <img loading="lazy" src="assets/esg_scatter.png?v=1" alt="ESG Score vs 1-Year Return">
+            <p class="muted">Figure 1: ESG Score vs 1-Year Return</p>
+          </div>
+          <div>
+            <img loading="lazy" src="assets/esg_volatility.png?v=1" alt="Average Volatility by ESG Tier">
+            <p class="muted">Figure 2: Average Volatility by ESG Tier</p>
+          </div>
+        </div>
+        <div style="margin-top:22px;text-align:center;">
+          <a class="btn" href="CODE/ESG_Sustainable_Investing_Dashboard.xlsx?v=1" target="_blank" rel="noopener" download>
+            📥 Download Excel Dashboard
+          </a>
+        </div>
       </div>
-      <div>
-        <img src="assets/credit_loss_dist.png?v=1" alt="Loss Distribution" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.2)">
-        <p class="muted">Figure 2: Loss Distribution (Defaults Only)</p>
+    </div>
+
+    <!-- 💳 Credit Risk Modeling Modal -->
+    <div id="modalCredit" class="modal" role="dialog" aria-labelledby="modalCredit-title" aria-modal="true" onclick="if(event.target===this)closeModal('modalCredit')">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('modalCredit')" aria-label="Close dialog">&times;</button>
+        <h3 id="modalCredit-title">💳 Credit Risk Modeling (PD / Loss)</h3>
+        <p class="muted">
+          Modeled PD as a logistic function of credit score (450–850), simulated defaults and portfolio losses. 
+          Includes an Excel dashboard with a PD curve table and charts.
+        </p>
+        <ul class="muted">
+          <li>📉 PD vs Credit Score (curve + scatter)</li>
+          <li>📊 Loss Distribution (defaults only)</li>
+          <li>📘 Excel: Raw data, summary, PD curve chart</li>
+        </ul>
+        <div class="charts-container">
+          <div>
+            <img loading="lazy" src="assets/credit_pd_curve.png?v=1" alt="PD vs Credit Score">
+            <p class="muted">Figure 1: Probability of Default vs Credit Score</p>
+          </div>
+          <div>
+            <img loading="lazy" src="assets/credit_loss_dist.png?v=1" alt="Loss Distribution">
+            <p class="muted">Figure 2: Loss Distribution (Defaults Only)</p>
+          </div>
+        </div>
+        <div style="margin-top:22px;text-align:center;">
+          <a class="btn" href="CODE/Credit_Risk_Model_Dashboard.xlsx?v=1" target="_blank" rel="noopener" download>
+            📥 Download Excel Dashboard
+          </a>
+        </div>
       </div>
     </div>
-    <div style="margin-top:22px;text-align:center;">
-      <a class="btn" href="CODE/Credit_Risk_Model_Dashboard.xlsx?v=1" target="_blank" rel="noopener" download>
-        📥 Download Excel Dashboard
-      </a>
-    </div>
-  </div>
-</div>
-
-
-
 
     <!-- 💬 Ask Me Anything — Contextual Chat -->
-<section id="askme" class="container">
-  <div class="card">
-    <h2>💬 Ask Me Anything</h2>
-    <p class="muted">
-      Curious about finance, investing, or my work? Chat with me — I’ll remember what we talked about.
-    </p>
+    <section id="askme" class="container" aria-labelledby="askme-title">
+      <div class="card">
+        <h2 id="askme-title">💬 Ask Me Anything</h2>
+        <p class="muted">
+          Curious about finance, investing, or my work? Chat with me — I’ll remember what we talked about.
+        </p>
 
-    <div id="chatBox"
-         style="background:var(--panel);border-radius:10px;padding:12px;height:280px;
-                overflow-y:auto;margin-top:10px;display:flex;flex-direction:column;gap:10px;">
-      <div class="bot"
-           style="align-self:flex-start;background:rgba(255,255,255,0.05);
-                  padding:8px 12px;border-radius:10px;max-width:80%;">
-        🤖 Hi there! I’m your finance assistant — ask me anything about investing, fintech, or markets.
+        <div id="chatBox"
+            style="background:var(--panel);border-radius:10px;padding:12px;height:280px;
+                  overflow-y:auto;margin-top:10px;display:flex;flex-direction:column;gap:10px;">
+          <div class="bot"
+              style="align-self:flex-start;background:rgba(255,255,255,0.05);
+                    padding:8px 12px;border-radius:10px;max-width:80%;">
+            🤖 Hi there! I’m your finance assistant — ask me anything about investing, fintech, or markets.
+          </div>
+        </div>
+
+        <!-- Updated input section for accessibility -->
+        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">
+          <label for="userQuestion" class="sr-only">Ask your question</label>
+          <input id="userQuestion"
+                type="text"
+                aria-label="Ask your question"
+                placeholder="Type your question here..."
+                style="flex:1 1 240px;padding:10px 12px;border-radius:10px;
+                      border:1px solid #333;background:var(--panel);color:var(--ink);
+                      font-size:1rem;"
+                autocomplete="off" />
+          <button class="btn" onclick="sendQuestion()" aria-label="Send your question">Send</button>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Updated input section for accessibility -->
-    <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">
-      <label for="userQuestion" class="sr-only">Ask your question</label>
-      <input id="userQuestion"
-             type="text"
-             aria-label="Ask your question"
-             placeholder="Type your question here..."
-             style="flex:1 1 240px;padding:10px 12px;border-radius:10px;
-                    border:1px solid #333;background:var(--panel);color:var(--ink);
-                    font-size:1rem;"
-             autocomplete="off" />
-      <button class="btn" onclick="sendQuestion()" aria-label="Send your question">Send</button>
-    </div>
-  </div>
-</section>
+    <style>
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+    </style>
 
-<style>
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-</style>
+    <script>
+      let chatHistory = [];
 
-<script>
-let chatHistory = [];
+      async function sendQuestion() {
+        const input = document.getElementById("userQuestion");
+        const chat = document.getElementById("chatBox");
+        const question = input.value.trim();
+        if (!question) return;
 
-async function sendQuestion() {
-  const input = document.getElementById("userQuestion");
-  const chat = document.getElementById("chatBox");
-  const question = input.value.trim();
-  if (!question) return;
+        // Show user message
+        const userMsg = document.createElement("div");
+        userMsg.className = "user";
+        userMsg.style.cssText =
+          "align-self:flex-end;background:var(--brand);color:#0b0f17;padding:8px 12px;border-radius:10px;max-width:80%;animation:fadeIn .3s ease;";
+        userMsg.textContent = question;
+        chat.appendChild(userMsg);
+        chat.scrollTop = chat.scrollHeight;
+        input.value = "";
 
-  // Show user message
-  const userMsg = document.createElement("div");
-  userMsg.className = "user";
-  userMsg.style.cssText =
-    "align-self:flex-end;background:var(--brand);color:#0b0f17;padding:8px 12px;border-radius:10px;max-width:80%;animation:fadeIn .3s ease;";
-  userMsg.textContent = question;
-  chat.appendChild(userMsg);
-  chat.scrollTop = chat.scrollHeight;
-  input.value = "";
+        // Add temporary "thinking" bubble
+        const botMsg = document.createElement("div");
+        botMsg.className = "bot";
+        botMsg.style.cssText =
+          "align-self:flex-start;background:rgba(255,255,255,0.05);padding:8px 12px;border-radius:10px;max-width:80%;color:var(--muted);font-style:italic;";
+        botMsg.textContent = "🤔 Thinking...";
+        chat.appendChild(botMsg);
+        chat.scrollTop = chat.scrollHeight;
 
-  // Add temporary "thinking" bubble
-  const botMsg = document.createElement("div");
-  botMsg.className = "bot";
-  botMsg.style.cssText =
-    "align-self:flex-start;background:rgba(255,255,255,0.05);padding:8px 12px;border-radius:10px;max-width:80%;color:var(--muted);font-style:italic;";
-  botMsg.textContent = "🤔 Thinking...";
-  chat.appendChild(botMsg);
-  chat.scrollTop = chat.scrollHeight;
+        // Update chat history
+        chatHistory.push({ role: "user", content: question });
 
-  // Update chat history
-  chatHistory.push({ role: "user", content: question });
+        let answer = "";
 
-  let answer = "";
+        try {
+          const res = await fetch("https://hadillzaher-cv.onrender.com/ask", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: question }),
+          });
 
-  try {
-    const res = await fetch("https://hadillzaher-cv.onrender.com/ask", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: question }),
-    });
+          const data = await res.json();
 
-    const data = await res.json();
+          if (data.answer) {
+            answer = data.answer;
+          } else if (data.error) {
+            answer = "⚠️ " + data.error;
+          } else {
+            answer = "Hmm, I couldn't find an exact answer — but let's think about it.";
+          }
+        } catch (err) {
+          console.error(err);
+          answer = "⚠️ Sorry, I couldn’t connect to the AI service.";
+        }
 
-    if (data.answer) {
-      answer = data.answer;
-    } else if (data.error) {
-      answer = "⚠️ " + data.error;
-    } else {
-      answer = "Hmm, I couldn't find an exact answer — but let's think about it.";
-    }
-  } catch (err) {
-    console.error(err);
-    answer = "⚠️ Sorry, I couldn’t connect to the AI service.";
-  }
+        // Display response
+        botMsg.textContent = "💬 " + answer;
+        chatHistory.push({ role: "bot", content: answer });
+        chat.scrollTop = chat.scrollHeight;
+      }
 
-  // Display response
-  botMsg.textContent = "💬 " + answer;
-  chatHistory.push({ role: "bot", content: answer });
-  chat.scrollTop = chat.scrollHeight;
-}
-
-// Allow pressing Enter to send message
-document.getElementById("userQuestion").addEventListener("keypress", (e) => {
-  if (e.key === "Enter") sendQuestion();
-});
-</script>
-
-
+      // Allow pressing Enter to send message
+      document.getElementById("userQuestion").addEventListener("keypress", (e) => {
+        if (e.key === "Enter") sendQuestion();
+      });
+    </script>
 
     <!-- Contact -->
     <div class="section-title" id="contact"><h2>Contact</h2></div>
-    <section class="card">
+    <section class="card" aria-label="Contact details">
       <p>Interested in discussing opportunities in fintech, asset management, or finance? Let’s connect!</p>
       <div class="kvs">
         <div class="muted">Email</div>
@@ -715,12 +773,17 @@ document.getElementById("userQuestion").addEventListener("keypress", (e) => {
         <div class="muted">GitHub</div>
         <div><a href="https://github.com/h4d1ll" target="_blank" rel="noopener">github.com/h4d1ll</a></div>
       </div>
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+        <a class="btn" href="mailto:miss.hzaher@gmail.com">📧 Email Me</a>
+        <a class="btn btn-outline" href="#about">↑ Back to top</a>
+      </div>
     </section>
   </main>
 
-  <button class="backtop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+  <button class="backtop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
   <footer>© <span id="y"></span> Hadill Zaher · Built with HTML, Python, CSS &amp; JS</footer>
 
   <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
 </body>
 </html>
+
